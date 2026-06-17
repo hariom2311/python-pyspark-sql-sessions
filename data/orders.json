@@ -1,0 +1,58 @@
+[
+  {
+    "order_id": 1001,
+    "customer_id": 1,
+    "product": "Laptop",
+    "amount": 85000,
+    "status": "completed",
+    "order_date": "2024-01-10"
+  },
+  {
+    "order_id": 1002,
+    "customer_id": 2,
+    "product": "Phone",
+    "amount": 45000,
+    "status": "pending",
+    "order_date": "2024-01-12"
+  },
+  {
+    "order_id": 1003,
+    "customer_id": 1,
+    "product": "Tablet",
+    "amount": 30000,
+    "status": "completed",
+    "order_date": "2024-01-15"
+  },
+  {
+    "order_id": 1004,
+    "customer_id": 3,
+    "product": "Monitor",
+    "amount": 20000,
+    "status": "cancelled",
+    "order_date": "2024-01-18"
+  },
+  {
+    "order_id": 1005,
+    "customer_id": 2,
+    "product": "Keyboard",
+    "amount": 2500,
+    "status": "completed",
+    "order_date": "2024-01-20"
+  },
+  {
+    "order_id": 1006,
+    "customer_id": 4,
+    "product": "Laptop",
+    "amount": 90000,
+    "status": "completed",
+    "order_date": "2024-01-22"
+  },
+  {
+    "order_id": 1007,
+    "customer_id": 3,
+    "product": "Mouse",
+    "amount": 1500,
+    "status": "completed",
+    "order_date": "2024-01-25"
+  }
+]

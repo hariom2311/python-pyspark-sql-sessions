@@ -1,0 +1,8 @@
+2024-01-15 08:01:23 INFO  user=alice  action=login  status=success
+2024-01-15 08:02:11 ERROR user=bob    action=login  status=failed
+2024-01-15 08:03:45 INFO  user=carol  action=upload status=success
+2024-01-15 08:04:02 WARN  user=dave   action=delete status=denied
+2024-01-15 08:05:30 ERROR user=alice  action=export status=failed
+2024-01-15 08:06:10 INFO  user=eve    action=login  status=success
+2024-01-15 08:07:55 ERROR user=frank  action=query  status=failed
+2024-01-15 08:08:40 INFO  user=grace  action=logout status=success
