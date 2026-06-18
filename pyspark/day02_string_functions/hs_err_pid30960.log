@@ -1,0 +1,891 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (malloc) failed to allocate 32744 bytes. Error detail: Chunk::new
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   This process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Unscaled Compressed Oops mode in which the Java heap is
+#     placed in the first 4GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 4GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (arena.cpp:168), pid=30960, tid=11868
+#
+# JRE version: OpenJDK Runtime Environment Temurin-21.0.8+9 (21.0.8+9) (build 21.0.8+9-LTS)
+# Java VM: OpenJDK 64-Bit Server VM Temurin-21.0.8+9 (21.0.8+9-LTS, mixed mode, tiered, compressed oops, compressed class ptrs, g1 gc, windows-amd64)
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -Xmx1g -XX:+IgnoreUnrecognizedVMOptions --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.invoke=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.base/java.net=ALL-UNNAMED --add-opens=java.base/java.nio=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens=java.base/jdk.internal.ref=ALL-UNNAMED --add-opens=java.base/sun.nio.ch=ALL-UNNAMED --add-opens=java.base/sun.nio.cs=ALL-UNNAMED --add-opens=java.base/sun.security.action=ALL-UNNAMED --add-opens=java.base/sun.util.calendar=ALL-UNNAMED --add-opens=java.security.jgss/sun.security.krb5=ALL-UNNAMED -Djdk.reflect.useDirectMethodHandle=false org.apache.spark.deploy.SparkSubmit --conf spark.master=local[*] --conf spark.app.name=Day02_PracticeQuestions --conf spark.sql.shuffle.partitions=4 --conf spark.ui.showConsoleProgress=false pyspark-shell
+
+Host: Intel(R) Core(TM) i5-10300H CPU @ 2.50GHz, 8 cores, 15G,  Windows 10 , 64 bit Build 19041 (10.0.19041.5915)
+Time: Thu Jun 18 08:12:46 2026 India Standard Time elapsed time: 32744.999894 seconds (0d 9h 5m 44s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x000001de85e12590):  JavaThread "C2 CompilerThread1" daemon [_thread_in_native, id=11868, stack(0x000000dd9fe00000,0x000000dd9ff00000) (1024K)]
+
+
+Current CompileTask:
+C2:32745005 8165   !   4       java.util.concurrent.ThreadPoolExecutor::getTask (177 bytes)
+
+Stack: [0x000000dd9fe00000,0x000000dd9ff00000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x6d2449]
+V  [jvm.dll+0x8ae341]
+V  [jvm.dll+0x8b08be]
+V  [jvm.dll+0x8b0fa3]
+V  [jvm.dll+0x280c96]
+V  [jvm.dll+0xc581d]
+V  [jvm.dll+0xc5d53]
+V  [jvm.dll+0x6ac41d]
+V  [jvm.dll+0x6619d5]
+V  [jvm.dll+0x65fd8e]
+V  [jvm.dll+0x248d55]
+V  [jvm.dll+0x2484af]
+V  [jvm.dll+0x1c89ee]
+V  [jvm.dll+0x257d4d]
+V  [jvm.dll+0x2562ea]
+V  [jvm.dll+0x3f2d16]
+V  [jvm.dll+0x857e6b]
+V  [jvm.dll+0x6d0b0d]
+C  [ucrtbase.dll+0x21bb2]
+C  [KERNEL32.DLL+0x17374]
+C  [ntdll.dll+0x4cc91]
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x000001de86bd8f50, length=65, elements={
+0x000001dee5803020, 0x000001deff9270e0, 0x000001deff927b30, 0x000001deff9388e0,
+0x000001deff910420, 0x000001deff913e90, 0x000001deff916a00, 0x000001deff91c510,
+0x000001deff91cfa0, 0x000001deff914930, 0x000001deff916370, 0x000001deff917db0,
+0x000001deff917720, 0x000001deff915650, 0x000001deff914fc0, 0x000001deff915ce0,
+0x000001de860edab0, 0x000001de860ec700, 0x000001de860eacc0, 0x000001de860ecd90,
+0x000001de860ec070, 0x000001de860ee140, 0x000001de860eb9e0, 0x000001de860ed420,
+0x000001de860eb350, 0x000001de871005b0, 0x000001de870fde50, 0x000001de871033a0,
+0x000001de87101960, 0x000001de870ff890, 0x000001de870fd130, 0x000001de870fcaa0,
+0x000001de870fff20, 0x000001de87101ff0, 0x000001de87100c40, 0x000001de871012d0,
+0x000001de87102680, 0x000001de87102d10, 0x000001de871040c0, 0x000001de870fe4e0,
+0x000001de870fd7c0, 0x000001de870feb70, 0x000001de870ff200, 0x000001de85f36c80,
+0x000001de85f33170, 0x000001de85f33e90, 0x000001de85f35f60, 0x000001de85f34520,
+0x000001de85f33800, 0x000001de85f30380, 0x000001de85f310a0, 0x000001de85f30a10,
+0x000001de85f34bb0, 0x000001de85f358d0, 0x000001de85f31730, 0x000001de85f31dc0,
+0x000001de85f365f0, 0x000001de85f2fcf0, 0x000001de884260d0, 0x000001de8842c9d0,
+0x000001de87e03530, 0x000001de87e097a0, 0x000001de87e07040, 0x000001de85e12590,
+0x000001de85d26700
+}
+
+Java Threads: ( => current thread )
+  0x000001dee5803020 JavaThread "main"                              [_thread_in_native, id=30448, stack(0x000000dda0000000,0x000000dda0100000) (1024K)]
+  0x000001deff9270e0 JavaThread "Reference Handler"          daemon [_thread_blocked, id=23752, stack(0x000000dda0800000,0x000000dda0900000) (1024K)]
+  0x000001deff927b30 JavaThread "Finalizer"                  daemon [_thread_blocked, id=33420, stack(0x000000dda0900000,0x000000dda0a00000) (1024K)]
+  0x000001deff9388e0 JavaThread "Signal Dispatcher"          daemon [_thread_blocked, id=22976, stack(0x000000dda0a00000,0x000000dda0b00000) (1024K)]
+  0x000001deff910420 JavaThread "Attach Listener"            daemon [_thread_blocked, id=11780, stack(0x000000dda0b00000,0x000000dda0c00000) (1024K)]
+  0x000001deff913e90 JavaThread "Service Thread"             daemon [_thread_blocked, id=24904, stack(0x000000dda0c00000,0x000000dda0d00000) (1024K)]
+  0x000001deff916a00 JavaThread "Monitor Deflation Thread"   daemon [_thread_blocked, id=34304, stack(0x000000dda0d00000,0x000000dda0e00000) (1024K)]
+  0x000001deff91c510 JavaThread "C2 CompilerThread0"         daemon [_thread_in_vm, id=25200, stack(0x000000dda0e00000,0x000000dda0f00000) (1024K)]
+  0x000001deff91cfa0 JavaThread "C1 CompilerThread0"         daemon [_thread_blocked, id=404, stack(0x000000dda0f00000,0x000000dda1000000) (1024K)]
+  0x000001deff914930 JavaThread "Common-Cleaner"             daemon [_thread_blocked, id=22580, stack(0x000000dda1000000,0x000000dda1100000) (1024K)]
+  0x000001deff916370 JavaThread "Notification Thread"        daemon [_thread_blocked, id=21168, stack(0x000000dda1100000,0x000000dda1200000) (1024K)]
+  0x000001deff917db0 JavaThread "Thread-1"                          [_thread_in_native, id=28844, stack(0x000000dda1b00000,0x000000dda1c00000) (1024K)]
+  0x000001deff917720 JavaThread "Thread-2"                          [_thread_in_native, id=4224, stack(0x000000dda1c00000,0x000000dda1d00000) (1024K)]
+  0x000001deff915650 JavaThread "rpc-boss-3-1"               daemon [_thread_in_native, id=29492, stack(0x000000dda1e00000,0x000000dda1f00000) (1024K)]
+  0x000001deff914fc0 JavaThread "dispatcher-event-loop-0"    daemon [_thread_blocked, id=26416, stack(0x000000dda1f00000,0x000000dda2000000) (1024K)]
+  0x000001deff915ce0 JavaThread "dispatcher-event-loop-1"    daemon [_thread_blocked, id=34528, stack(0x000000dda2000000,0x000000dda2100000) (1024K)]
+  0x000001de860edab0 JavaThread "dispatcher-event-loop-2"    daemon [_thread_blocked, id=14768, stack(0x000000dda2100000,0x000000dda2200000) (1024K)]
+  0x000001de860ec700 JavaThread "dispatcher-event-loop-3"    daemon [_thread_blocked, id=24480, stack(0x000000dda2200000,0x000000dda2300000) (1024K)]
+  0x000001de860eacc0 JavaThread "dispatcher-event-loop-4"    daemon [_thread_blocked, id=18348, stack(0x000000dda2300000,0x000000dda2400000) (1024K)]
+  0x000001de860ecd90 JavaThread "dispatcher-event-loop-5"    daemon [_thread_blocked, id=12084, stack(0x000000dda2400000,0x000000dda2500000) (1024K)]
+  0x000001de860ec070 JavaThread "dispatcher-event-loop-6"    daemon [_thread_blocked, id=23236, stack(0x000000dda2500000,0x000000dda2600000) (1024K)]
+  0x000001de860ee140 JavaThread "dispatcher-event-loop-7"    daemon [_thread_blocked, id=19572, stack(0x000000dda2600000,0x000000dda2700000) (1024K)]
+  0x000001de860eb9e0 JavaThread "map-output-dispatcher-0"    daemon [_thread_blocked, id=18676, stack(0x000000dda2700000,0x000000dda2800000) (1024K)]
+  0x000001de860ed420 JavaThread "map-output-dispatcher-1"    daemon [_thread_blocked, id=30712, stack(0x000000dda2800000,0x000000dda2900000) (1024K)]
+  0x000001de860eb350 JavaThread "map-output-dispatcher-2"    daemon [_thread_blocked, id=5568, stack(0x000000dda2900000,0x000000dda2a00000) (1024K)]
+  0x000001de871005b0 JavaThread "map-output-dispatcher-3"    daemon [_thread_blocked, id=33576, stack(0x000000dda2a00000,0x000000dda2b00000) (1024K)]
+  0x000001de870fde50 JavaThread "map-output-dispatcher-4"    daemon [_thread_blocked, id=12572, stack(0x000000dda2b00000,0x000000dda2c00000) (1024K)]
+  0x000001de871033a0 JavaThread "map-output-dispatcher-5"    daemon [_thread_blocked, id=14664, stack(0x000000dda2c00000,0x000000dda2d00000) (1024K)]
+  0x000001de87101960 JavaThread "map-output-dispatcher-6"    daemon [_thread_blocked, id=2512, stack(0x000000dda2d00000,0x000000dda2e00000) (1024K)]
+  0x000001de870ff890 JavaThread "map-output-dispatcher-7"    daemon [_thread_blocked, id=32488, stack(0x000000dda2e00000,0x000000dda2f00000) (1024K)]
+  0x000001de870fd130 JavaThread "Thread-3"                          [_thread_in_native, id=17112, stack(0x000000dda2f00000,0x000000dda3000000) (1024K)]
+  0x000001de870fcaa0 JavaThread "dispatcher-BlockManagerMaster" daemon [_thread_blocked, id=16644, stack(0x000000dda3000000,0x000000dda3100000) (1024K)]
+  0x000001de870fff20 JavaThread "dispatcher-BlockManagerEndpoint1" daemon [_thread_blocked, id=31100, stack(0x000000dda3100000,0x000000dda3200000) (1024K)]
+  0x000001de87101ff0 JavaThread "RemoteBlock-temp-file-clean-thread" daemon [_thread_blocked, id=30948, stack(0x000000dda3200000,0x000000dda3300000) (1024K)]
+  0x000001de87100c40 JavaThread "SparkUI-55"                 daemon [_thread_in_native, id=27000, stack(0x000000dda3300000,0x000000dda3400000) (1024K)]
+  0x000001de871012d0 JavaThread "SparkUI-56"                 daemon [_thread_in_native, id=25628, stack(0x000000dda3400000,0x000000dda3500000) (1024K)]
+  0x000001de87102680 JavaThread "SparkUI-57"                 daemon [_thread_in_native, id=30956, stack(0x000000dda3500000,0x000000dda3600000) (1024K)]
+  0x000001de87102d10 JavaThread "SparkUI-58"                 daemon [_thread_in_native, id=34396, stack(0x000000dda3600000,0x000000dda3700000) (1024K)]
+  0x000001de871040c0 JavaThread "SparkUI-59-acceptor-0@5c717e6e-ServerConnector@52b68b90{HTTP/1.1, (http/1.1)}{0.0.0.0:4040}" daemon [_thread_in_native, id=30088, stack(0x000000dda3700000,0x000000dda3800000) (1024K)]
+  0x000001de870fe4e0 JavaThread "SparkUI-60"                 daemon [_thread_blocked, id=2032, stack(0x000000dda3800000,0x000000dda3900000) (1024K)]
+  0x000001de870fd7c0 JavaThread "SparkUI-61"                 daemon [_thread_blocked, id=29300, stack(0x000000dda3900000,0x000000dda3a00000) (1024K)]
+  0x000001de870feb70 JavaThread "SparkUI-62"                 daemon [_thread_blocked, id=12656, stack(0x000000dda3a00000,0x000000dda3b00000) (1024K)]
+  0x000001de870ff200 JavaThread "dispatcher-HeartbeatReceiver" daemon [_thread_blocked, id=28768, stack(0x000000dda1d00000,0x000000dda1e00000) (1024K)]
+  0x000001de85f36c80 JavaThread "heartbeat-receiver-event-loop-thread" daemon [_thread_blocked, id=29840, stack(0x000000dda3b00000,0x000000dda3c00000) (1024K)]
+  0x000001de85f33170 JavaThread "netty-rpc-env-timeout"      daemon [_thread_blocked, id=26212, stack(0x000000dda3c00000,0x000000dda3d00000) (1024K)]
+  0x000001de85f33e90 JavaThread "task-starvation-timer"      daemon [_thread_blocked, id=12032, stack(0x000000dda3d00000,0x000000dda3e00000) (1024K)]
+  0x000001de85f35f60 JavaThread "task-abort-timer"           daemon [_thread_blocked, id=24440, stack(0x000000dda3e00000,0x000000dda3f00000) (1024K)]
+  0x000001de85f34520 JavaThread "dag-scheduler-event-loop"   daemon [_thread_blocked, id=22068, stack(0x000000dda3f00000,0x000000dda4000000) (1024K)]
+  0x000001de85f33800 JavaThread "driver-heartbeater"         daemon [_thread_blocked, id=25968, stack(0x000000dda4000000,0x000000dda4100000) (1024K)]
+  0x000001de85f30380 JavaThread "executor-kill-mark-cleanup" daemon [_thread_blocked, id=28892, stack(0x000000dda4100000,0x000000dda4200000) (1024K)]
+  0x000001de85f310a0 JavaThread "executor-heartbeater"       daemon [_thread_blocked, id=30748, stack(0x000000dda4200000,0x000000dda4300000) (1024K)]
+  0x000001de85f30a10 JavaThread "shuffle-boss-6-1"           daemon [_thread_in_native, id=18384, stack(0x000000dda4300000,0x000000dda4400000) (1024K)]
+  0x000001de85f34bb0 JavaThread "Spark Context Cleaner"      daemon [_thread_blocked, id=28568, stack(0x000000dda1200000,0x000000dda1300000) (1024K)]
+  0x000001de85f358d0 JavaThread "context-cleaner-periodic-gc" daemon [_thread_blocked, id=28948, stack(0x000000dda4400000,0x000000dda4500000) (1024K)]
+  0x000001de85f31730 JavaThread "spark-listener-group-appStatus" daemon [_thread_blocked, id=20988, stack(0x000000dda4500000,0x000000dda4600000) (1024K)]
+  0x000001de85f31dc0 JavaThread "spark-listener-group-executorManagement" daemon [_thread_blocked, id=29176, stack(0x000000dda4600000,0x000000dda4700000) (1024K)]
+  0x000001de85f365f0 JavaThread "element-tracking-store-worker" daemon [_thread_blocked, id=28572, stack(0x000000dda4900000,0x000000dda4a00000) (1024K)]
+  0x000001de85f2fcf0 JavaThread "org.apache.hadoop.fs.FileSystem$Statistics$StatisticsDataReferenceCleaner" daemon [_thread_blocked, id=12600, stack(0x000000dd9fd00000,0x000000dd9fe00000) (1024K)]
+  0x000001de884260d0 JavaThread "Idle Worker Monitor for C:\Users\hariom\AppData\Local\Programs\Python\Python311\python.exe" daemon [_thread_blocked, id=8040, stack(0x000000dda4700000,0x000000dda4800000) (1024K)]
+  0x000001de8842c9d0 JavaThread "task-result-getter-0"       daemon [_thread_blocked, id=11748, stack(0x000000dd9ff00000,0x000000dda0000000) (1024K)]
+  0x000001de87e03530 JavaThread "task-result-getter-1"       daemon [_thread_blocked, id=18848, stack(0x000000dda5600000,0x000000dda5700000) (1024K)]
+  0x000001de87e097a0 JavaThread "task-result-getter-2"       daemon [_thread_blocked, id=27932, stack(0x000000dda5700000,0x000000dda5800000) (1024K)]
+  0x000001de87e07040 JavaThread "task-result-getter-3"       daemon [_thread_blocked, id=27536, stack(0x000000dda5800000,0x000000dda5900000) (1024K)]
+=>0x000001de85e12590 JavaThread "C2 CompilerThread1"         daemon [_thread_in_native, id=11868, stack(0x000000dd9fe00000,0x000000dd9ff00000) (1024K)]
+  0x000001de85d26700 JavaThread "C2 CompilerThread2"         daemon [_thread_in_native, id=2068, stack(0x000000dda4800000,0x000000dda4900000) (1024K)]
+Total: 65
+
+Other Threads:
+  0x000001deff875fc0 VMThread "VM Thread"                           [id=16888, stack(0x000000dda0700000,0x000000dda0800000) (1024K)]
+  0x000001deff827af0 WatcherThread "VM Periodic Task Thread"        [id=27988, stack(0x000000dda0600000,0x000000dda0700000) (1024K)]
+  0x000001dee7a69c00 WorkerThread "GC Thread#0"                     [id=8636, stack(0x000000dda0100000,0x000000dda0200000) (1024K)]
+  0x000001de8487e720 WorkerThread "GC Thread#1"                     [id=20472, stack(0x000000dda1300000,0x000000dda1400000) (1024K)]
+  0x000001de8487eac0 WorkerThread "GC Thread#2"                     [id=9052, stack(0x000000dda1400000,0x000000dda1500000) (1024K)]
+  0x000001de851148f0 WorkerThread "GC Thread#3"                     [id=34476, stack(0x000000dda1500000,0x000000dda1600000) (1024K)]
+  0x000001de85114c90 WorkerThread "GC Thread#4"                     [id=33092, stack(0x000000dda1600000,0x000000dda1700000) (1024K)]
+  0x000001de85115030 WorkerThread "GC Thread#5"                     [id=27212, stack(0x000000dda1700000,0x000000dda1800000) (1024K)]
+  0x000001de8532a9e0 WorkerThread "GC Thread#6"                     [id=11988, stack(0x000000dda1800000,0x000000dda1900000) (1024K)]
+  0x000001de8532ad80 WorkerThread "GC Thread#7"                     [id=30524, stack(0x000000dda1900000,0x000000dda1a00000) (1024K)]
+  0x000001dee7a72c30 ConcurrentGCThread "G1 Main Marker"            [id=8532, stack(0x000000dda0200000,0x000000dda0300000) (1024K)]
+  0x000001dee7a73d70 WorkerThread "G1 Conc#0"                       [id=2824, stack(0x000000dda0300000,0x000000dda0400000) (1024K)]
+  0x000001de85334af0 WorkerThread "G1 Conc#1"                       [id=29104, stack(0x000000dda1a00000,0x000000dda1b00000) (1024K)]
+  0x000001deff6f6690 ConcurrentGCThread "G1 Refine#0"               [id=34724, stack(0x000000dda0400000,0x000000dda0500000) (1024K)]
+  0x000001deff6f75c0 ConcurrentGCThread "G1 Service"                [id=22932, stack(0x000000dda0500000,0x000000dda0600000) (1024K)]
+Total: 15
+
+Threads with active compile tasks:
+C2 CompilerThread0  32745228 8373   !   4       org.apache.spark.rpc.netty.Inbox::$anonfun$process$1 (470 bytes)
+C2 CompilerThread1  32745228 8165   !   4       java.util.concurrent.ThreadPoolExecutor::getTask (177 bytes)
+C2 CompilerThread2  32745229 8357       4       scala.concurrent.impl.Promise::$anonfun$transform$1 (13 bytes)
+Total: 3
+
+VM state: not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap address: 0x00000000c0000000, size: 1024 MB, Compressed Oops mode: 32-bit
+
+CDS archive(s) not mapped
+Compressed class space mapped at: 0x0000000100000000-0x0000000140000000, reserved size: 1073741824
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 3, Narrow klass range: 0x140000000
+
+GC Precious Log:
+ CardTable entry size: 512
+ Card Set container configuration: InlinePtr #cards 5 size 8 Array Of Cards #cards 12 size 40 Howl #buckets 4 coarsen threshold 1843 Howl Bitmap #cards 512 size 80 coarsen threshold 460 Card regions per heap region 1 cards per card region 2048
+ CPUs: 8 total, 8 available
+ Memory: 16177M
+ Large Page Support: Disabled
+ NUMA Support: Disabled
+ Compressed Oops: Enabled (32-bit)
+ Heap Region Size: 1M
+ Heap Min Capacity: 8M
+ Heap Initial Capacity: 254M
+ Heap Max Capacity: 1G
+ Pre-touch: Disabled
+ Parallel Workers: 8
+ Concurrent Workers: 2
+ Concurrent Refinement Workers: 8
+ Periodic GC: Disabled
+
+Heap:
+ garbage-first heap   total 122880K, used 89681K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 43 young (44032K), 5 survivors (5120K)
+ Metaspace       used 115242K, committed 116032K, reserved 1179648K
+  class space    used 14820K, committed 15168K, reserved 1048576K
+
+Heap Regions: E=young(eden), S=young(survivor), O=old, HS=humongous(starts), HC=humongous(continues), CS=collection set, F=free, TAMS=top-at-mark-start, PB=parsable bottom
+|   0|0x00000000c0000000, 0x00000000c0100000, 0x00000000c0100000|100%|HS|  |TAMS 0x00000000c0000000| PB 0x00000000c0000000| Complete 
+|   1|0x00000000c0100000, 0x00000000c0200000, 0x00000000c0200000|100%|HS|  |TAMS 0x00000000c0100000| PB 0x00000000c0100000| Complete 
+|   2|0x00000000c0200000, 0x00000000c0300000, 0x00000000c0300000|100%|HC|  |TAMS 0x00000000c0200000| PB 0x00000000c0200000| Complete 
+|   3|0x00000000c0300000, 0x00000000c0400000, 0x00000000c0400000|100%|HS|  |TAMS 0x00000000c0300000| PB 0x00000000c0300000| Complete 
+|   4|0x00000000c0400000, 0x00000000c0500000, 0x00000000c0500000|100%|HC|  |TAMS 0x00000000c0400000| PB 0x00000000c0400000| Complete 
+|   5|0x00000000c0500000, 0x00000000c0600000, 0x00000000c0600000|100%|HC|  |TAMS 0x00000000c0500000| PB 0x00000000c0500000| Complete 
+|   6|0x00000000c0600000, 0x00000000c0700000, 0x00000000c0700000|100%|HS|  |TAMS 0x00000000c0600000| PB 0x00000000c0600000| Complete 
+|   7|0x00000000c0700000, 0x00000000c0800000, 0x00000000c0800000|100%|HS|  |TAMS 0x00000000c0700000| PB 0x00000000c0700000| Complete 
+|   8|0x00000000c0800000, 0x00000000c0900000, 0x00000000c0900000|100%|HS|  |TAMS 0x00000000c0800000| PB 0x00000000c0800000| Complete 
+|   9|0x00000000c0900000, 0x00000000c0a00000, 0x00000000c0a00000|100%| O|  |TAMS 0x00000000c0900000| PB 0x00000000c0900000| Untracked 
+|  10|0x00000000c0a00000, 0x00000000c0b00000, 0x00000000c0b00000|100%| O|  |TAMS 0x00000000c0a00000| PB 0x00000000c0a00000| Untracked 
+|  11|0x00000000c0b00000, 0x00000000c0c00000, 0x00000000c0c00000|100%| O|  |TAMS 0x00000000c0b00000| PB 0x00000000c0b00000| Untracked 
+|  12|0x00000000c0c00000, 0x00000000c0d00000, 0x00000000c0d00000|100%| O|  |TAMS 0x00000000c0c00000| PB 0x00000000c0c00000| Untracked 
+|  13|0x00000000c0d00000, 0x00000000c0e00000, 0x00000000c0e00000|100%| O|  |TAMS 0x00000000c0d00000| PB 0x00000000c0d00000| Untracked 
+|  14|0x00000000c0e00000, 0x00000000c0f00000, 0x00000000c0f00000|100%| O|  |TAMS 0x00000000c0e00000| PB 0x00000000c0e00000| Untracked 
+|  15|0x00000000c0f00000, 0x00000000c1000000, 0x00000000c1000000|100%| O|  |TAMS 0x00000000c0f00000| PB 0x00000000c0f00000| Untracked 
+|  16|0x00000000c1000000, 0x00000000c1100000, 0x00000000c1100000|100%| O|  |TAMS 0x00000000c1000000| PB 0x00000000c1000000| Untracked 
+|  17|0x00000000c1100000, 0x00000000c1200000, 0x00000000c1200000|100%| O|  |TAMS 0x00000000c1100000| PB 0x00000000c1100000| Untracked 
+|  18|0x00000000c1200000, 0x00000000c1300000, 0x00000000c1300000|100%| O|  |TAMS 0x00000000c1200000| PB 0x00000000c1200000| Untracked 
+|  19|0x00000000c1300000, 0x00000000c1400000, 0x00000000c1400000|100%| O|  |TAMS 0x00000000c1300000| PB 0x00000000c1300000| Untracked 
+|  20|0x00000000c1400000, 0x00000000c1500000, 0x00000000c1500000|100%| O|  |TAMS 0x00000000c1400000| PB 0x00000000c1400000| Untracked 
+|  21|0x00000000c1500000, 0x00000000c1600000, 0x00000000c1600000|100%| O|  |TAMS 0x00000000c1500000| PB 0x00000000c1500000| Untracked 
+|  22|0x00000000c1600000, 0x00000000c1700000, 0x00000000c1700000|100%| O|  |TAMS 0x00000000c1600000| PB 0x00000000c1600000| Untracked 
+|  23|0x00000000c1700000, 0x00000000c1800000, 0x00000000c1800000|100%| O|  |TAMS 0x00000000c1700000| PB 0x00000000c1700000| Untracked 
+|  24|0x00000000c1800000, 0x00000000c1900000, 0x00000000c1900000|100%| O|  |TAMS 0x00000000c1800000| PB 0x00000000c1800000| Untracked 
+|  25|0x00000000c1900000, 0x00000000c1a00000, 0x00000000c1a00000|100%| O|  |TAMS 0x00000000c1900000| PB 0x00000000c1900000| Untracked 
+|  26|0x00000000c1a00000, 0x00000000c1b00000, 0x00000000c1b00000|100%| O|  |TAMS 0x00000000c1a00000| PB 0x00000000c1a00000| Untracked 
+|  27|0x00000000c1b00000, 0x00000000c1c00000, 0x00000000c1c00000|100%| O|  |TAMS 0x00000000c1b00000| PB 0x00000000c1b00000| Untracked 
+|  28|0x00000000c1c00000, 0x00000000c1d00000, 0x00000000c1d00000|100%| O|  |TAMS 0x00000000c1c00000| PB 0x00000000c1c00000| Untracked 
+|  29|0x00000000c1d00000, 0x00000000c1e00000, 0x00000000c1e00000|100%| O|  |TAMS 0x00000000c1d00000| PB 0x00000000c1d00000| Untracked 
+|  30|0x00000000c1e00000, 0x00000000c1f00000, 0x00000000c1f00000|100%| O|  |TAMS 0x00000000c1e00000| PB 0x00000000c1e00000| Untracked 
+|  31|0x00000000c1f00000, 0x00000000c2000000, 0x00000000c2000000|100%| O|  |TAMS 0x00000000c1f00000| PB 0x00000000c1f00000| Untracked 
+|  32|0x00000000c2000000, 0x00000000c2100000, 0x00000000c2100000|100%| O|  |TAMS 0x00000000c2000000| PB 0x00000000c2000000| Untracked 
+|  33|0x00000000c2100000, 0x00000000c2200000, 0x00000000c2200000|100%| O|  |TAMS 0x00000000c2100000| PB 0x00000000c2100000| Untracked 
+|  34|0x00000000c2200000, 0x00000000c2300000, 0x00000000c2300000|100%| O|  |TAMS 0x00000000c2200000| PB 0x00000000c2200000| Untracked 
+|  35|0x00000000c2300000, 0x00000000c2400000, 0x00000000c2400000|100%| O|  |TAMS 0x00000000c2300000| PB 0x00000000c2300000| Untracked 
+|  36|0x00000000c2400000, 0x00000000c2500000, 0x00000000c2500000|100%| O|  |TAMS 0x00000000c2400000| PB 0x00000000c2400000| Untracked 
+|  37|0x00000000c2500000, 0x00000000c2600000, 0x00000000c2600000|100%| O|  |TAMS 0x00000000c2500000| PB 0x00000000c2500000| Untracked 
+|  38|0x00000000c2600000, 0x00000000c2700000, 0x00000000c2700000|100%| O|  |TAMS 0x00000000c2600000| PB 0x00000000c2600000| Untracked 
+|  39|0x00000000c2700000, 0x00000000c2800000, 0x00000000c2800000|100%| O|  |TAMS 0x00000000c2700000| PB 0x00000000c2700000| Untracked 
+|  40|0x00000000c2800000, 0x00000000c2900000, 0x00000000c2900000|100%| O|  |TAMS 0x00000000c2800000| PB 0x00000000c2800000| Untracked 
+|  41|0x00000000c2900000, 0x00000000c2a00000, 0x00000000c2a00000|100%| O|  |TAMS 0x00000000c2900000| PB 0x00000000c2900000| Untracked 
+|  42|0x00000000c2a00000, 0x00000000c2a94570, 0x00000000c2b00000| 57%| O|  |TAMS 0x00000000c2a00000| PB 0x00000000c2a00000| Untracked 
+|  43|0x00000000c2b00000, 0x00000000c2b00000, 0x00000000c2c00000|  0%| F|  |TAMS 0x00000000c2b00000| PB 0x00000000c2b00000| Untracked 
+|  44|0x00000000c2c00000, 0x00000000c2c00000, 0x00000000c2d00000|  0%| F|  |TAMS 0x00000000c2c00000| PB 0x00000000c2c00000| Untracked 
+|  45|0x00000000c2d00000, 0x00000000c2d00000, 0x00000000c2e00000|  0%| F|  |TAMS 0x00000000c2d00000| PB 0x00000000c2d00000| Untracked 
+|  46|0x00000000c2e00000, 0x00000000c2e00000, 0x00000000c2f00000|  0%| F|  |TAMS 0x00000000c2e00000| PB 0x00000000c2e00000| Untracked 
+|  47|0x00000000c2f00000, 0x00000000c2f00000, 0x00000000c3000000|  0%| F|  |TAMS 0x00000000c2f00000| PB 0x00000000c2f00000| Untracked 
+|  48|0x00000000c3000000, 0x00000000c3000000, 0x00000000c3100000|  0%| F|  |TAMS 0x00000000c3000000| PB 0x00000000c3000000| Untracked 
+|  49|0x00000000c3100000, 0x00000000c3200000, 0x00000000c3200000|100%| S|CS|TAMS 0x00000000c3100000| PB 0x00000000c3100000| Complete 
+|  50|0x00000000c3200000, 0x00000000c3300000, 0x00000000c3300000|100%| S|CS|TAMS 0x00000000c3200000| PB 0x00000000c3200000| Complete 
+|  51|0x00000000c3300000, 0x00000000c3400000, 0x00000000c3400000|100%| S|CS|TAMS 0x00000000c3300000| PB 0x00000000c3300000| Complete 
+|  52|0x00000000c3400000, 0x00000000c3500000, 0x00000000c3500000|100%| S|CS|TAMS 0x00000000c3400000| PB 0x00000000c3400000| Complete 
+|  53|0x00000000c3500000, 0x00000000c3600000, 0x00000000c3600000|100%| S|CS|TAMS 0x00000000c3500000| PB 0x00000000c3500000| Complete 
+|  54|0x00000000c3600000, 0x00000000c3600000, 0x00000000c3700000|  0%| F|  |TAMS 0x00000000c3600000| PB 0x00000000c3600000| Untracked 
+|  55|0x00000000c3700000, 0x00000000c3700000, 0x00000000c3800000|  0%| F|  |TAMS 0x00000000c3700000| PB 0x00000000c3700000| Untracked 
+|  56|0x00000000c3800000, 0x00000000c3800000, 0x00000000c3900000|  0%| F|  |TAMS 0x00000000c3800000| PB 0x00000000c3800000| Untracked 
+|  57|0x00000000c3900000, 0x00000000c3900000, 0x00000000c3a00000|  0%| F|  |TAMS 0x00000000c3900000| PB 0x00000000c3900000| Untracked 
+|  58|0x00000000c3a00000, 0x00000000c3a00000, 0x00000000c3b00000|  0%| F|  |TAMS 0x00000000c3a00000| PB 0x00000000c3a00000| Untracked 
+|  59|0x00000000c3b00000, 0x00000000c3b00000, 0x00000000c3c00000|  0%| F|  |TAMS 0x00000000c3b00000| PB 0x00000000c3b00000| Untracked 
+|  60|0x00000000c3c00000, 0x00000000c3c00000, 0x00000000c3d00000|  0%| F|  |TAMS 0x00000000c3c00000| PB 0x00000000c3c00000| Untracked 
+|  61|0x00000000c3d00000, 0x00000000c3d00000, 0x00000000c3e00000|  0%| F|  |TAMS 0x00000000c3d00000| PB 0x00000000c3d00000| Untracked 
+|  62|0x00000000c3e00000, 0x00000000c3e00000, 0x00000000c3f00000|  0%| F|  |TAMS 0x00000000c3e00000| PB 0x00000000c3e00000| Untracked 
+|  63|0x00000000c3f00000, 0x00000000c3f00000, 0x00000000c4000000|  0%| F|  |TAMS 0x00000000c3f00000| PB 0x00000000c3f00000| Untracked 
+|  64|0x00000000c4000000, 0x00000000c4000000, 0x00000000c4100000|  0%| F|  |TAMS 0x00000000c4000000| PB 0x00000000c4000000| Untracked 
+|  65|0x00000000c4100000, 0x00000000c4100000, 0x00000000c4200000|  0%| F|  |TAMS 0x00000000c4100000| PB 0x00000000c4100000| Untracked 
+|  66|0x00000000c4200000, 0x00000000c4200000, 0x00000000c4300000|  0%| F|  |TAMS 0x00000000c4200000| PB 0x00000000c4200000| Untracked 
+|  67|0x00000000c4300000, 0x00000000c4300000, 0x00000000c4400000|  0%| F|  |TAMS 0x00000000c4300000| PB 0x00000000c4300000| Untracked 
+|  68|0x00000000c4400000, 0x00000000c4400000, 0x00000000c4500000|  0%| F|  |TAMS 0x00000000c4400000| PB 0x00000000c4400000| Untracked 
+|  69|0x00000000c4500000, 0x00000000c4500000, 0x00000000c4600000|  0%| F|  |TAMS 0x00000000c4500000| PB 0x00000000c4500000| Untracked 
+|  70|0x00000000c4600000, 0x00000000c4600000, 0x00000000c4700000|  0%| F|  |TAMS 0x00000000c4600000| PB 0x00000000c4600000| Untracked 
+|  71|0x00000000c4700000, 0x00000000c4700000, 0x00000000c4800000|  0%| F|  |TAMS 0x00000000c4700000| PB 0x00000000c4700000| Untracked 
+|  72|0x00000000c4800000, 0x00000000c4800000, 0x00000000c4900000|  0%| F|  |TAMS 0x00000000c4800000| PB 0x00000000c4800000| Untracked 
+|  73|0x00000000c4900000, 0x00000000c4900000, 0x00000000c4a00000|  0%| F|  |TAMS 0x00000000c4900000| PB 0x00000000c4900000| Untracked 
+|  74|0x00000000c4a00000, 0x00000000c4a00000, 0x00000000c4b00000|  0%| F|  |TAMS 0x00000000c4a00000| PB 0x00000000c4a00000| Untracked 
+|  75|0x00000000c4b00000, 0x00000000c4b00000, 0x00000000c4c00000|  0%| F|  |TAMS 0x00000000c4b00000| PB 0x00000000c4b00000| Untracked 
+|  76|0x00000000c4c00000, 0x00000000c4c00000, 0x00000000c4d00000|  0%| F|  |TAMS 0x00000000c4c00000| PB 0x00000000c4c00000| Untracked 
+|  77|0x00000000c4d00000, 0x00000000c4d00000, 0x00000000c4e00000|  0%| F|  |TAMS 0x00000000c4d00000| PB 0x00000000c4d00000| Untracked 
+|  78|0x00000000c4e00000, 0x00000000c4e00000, 0x00000000c4f00000|  0%| F|  |TAMS 0x00000000c4e00000| PB 0x00000000c4e00000| Untracked 
+|  79|0x00000000c4f00000, 0x00000000c4faced8, 0x00000000c5000000| 67%| E|  |TAMS 0x00000000c4f00000| PB 0x00000000c4f00000| Complete 
+|  80|0x00000000c5000000, 0x00000000c5100000, 0x00000000c5100000|100%| E|CS|TAMS 0x00000000c5000000| PB 0x00000000c5000000| Complete 
+|  81|0x00000000c5100000, 0x00000000c5200000, 0x00000000c5200000|100%| E|CS|TAMS 0x00000000c5100000| PB 0x00000000c5100000| Complete 
+|  82|0x00000000c5200000, 0x00000000c5300000, 0x00000000c5300000|100%| E|CS|TAMS 0x00000000c5200000| PB 0x00000000c5200000| Complete 
+|  83|0x00000000c5300000, 0x00000000c5400000, 0x00000000c5400000|100%| E|CS|TAMS 0x00000000c5300000| PB 0x00000000c5300000| Complete 
+|  84|0x00000000c5400000, 0x00000000c5500000, 0x00000000c5500000|100%| E|CS|TAMS 0x00000000c5400000| PB 0x00000000c5400000| Complete 
+|  85|0x00000000c5500000, 0x00000000c5600000, 0x00000000c5600000|100%| E|CS|TAMS 0x00000000c5500000| PB 0x00000000c5500000| Complete 
+|  86|0x00000000c5600000, 0x00000000c5700000, 0x00000000c5700000|100%| E|CS|TAMS 0x00000000c5600000| PB 0x00000000c5600000| Complete 
+|  87|0x00000000c5700000, 0x00000000c5800000, 0x00000000c5800000|100%| E|CS|TAMS 0x00000000c5700000| PB 0x00000000c5700000| Complete 
+|  88|0x00000000c5800000, 0x00000000c5900000, 0x00000000c5900000|100%| E|CS|TAMS 0x00000000c5800000| PB 0x00000000c5800000| Complete 
+|  89|0x00000000c5900000, 0x00000000c5a00000, 0x00000000c5a00000|100%| E|CS|TAMS 0x00000000c5900000| PB 0x00000000c5900000| Complete 
+|  90|0x00000000c5a00000, 0x00000000c5b00000, 0x00000000c5b00000|100%| E|CS|TAMS 0x00000000c5a00000| PB 0x00000000c5a00000| Complete 
+|  91|0x00000000c5b00000, 0x00000000c5c00000, 0x00000000c5c00000|100%| E|CS|TAMS 0x00000000c5b00000| PB 0x00000000c5b00000| Complete 
+|  92|0x00000000c5c00000, 0x00000000c5d00000, 0x00000000c5d00000|100%| E|CS|TAMS 0x00000000c5c00000| PB 0x00000000c5c00000| Complete 
+|  93|0x00000000c5d00000, 0x00000000c5e00000, 0x00000000c5e00000|100%| E|CS|TAMS 0x00000000c5d00000| PB 0x00000000c5d00000| Complete 
+|  94|0x00000000c5e00000, 0x00000000c5f00000, 0x00000000c5f00000|100%| E|CS|TAMS 0x00000000c5e00000| PB 0x00000000c5e00000| Complete 
+|  95|0x00000000c5f00000, 0x00000000c6000000, 0x00000000c6000000|100%| E|CS|TAMS 0x00000000c5f00000| PB 0x00000000c5f00000| Complete 
+|  96|0x00000000c6000000, 0x00000000c6100000, 0x00000000c6100000|100%| E|CS|TAMS 0x00000000c6000000| PB 0x00000000c6000000| Complete 
+|  97|0x00000000c6100000, 0x00000000c6200000, 0x00000000c6200000|100%| E|CS|TAMS 0x00000000c6100000| PB 0x00000000c6100000| Complete 
+|  98|0x00000000c6200000, 0x00000000c6300000, 0x00000000c6300000|100%| E|CS|TAMS 0x00000000c6200000| PB 0x00000000c6200000| Complete 
+|  99|0x00000000c6300000, 0x00000000c6400000, 0x00000000c6400000|100%| E|CS|TAMS 0x00000000c6300000| PB 0x00000000c6300000| Complete 
+| 100|0x00000000c6400000, 0x00000000c6500000, 0x00000000c6500000|100%| E|CS|TAMS 0x00000000c6400000| PB 0x00000000c6400000| Complete 
+| 101|0x00000000c6500000, 0x00000000c6600000, 0x00000000c6600000|100%| E|CS|TAMS 0x00000000c6500000| PB 0x00000000c6500000| Complete 
+| 102|0x00000000c6600000, 0x00000000c6700000, 0x00000000c6700000|100%| E|CS|TAMS 0x00000000c6600000| PB 0x00000000c6600000| Complete 
+| 103|0x00000000c6700000, 0x00000000c6800000, 0x00000000c6800000|100%| E|CS|TAMS 0x00000000c6700000| PB 0x00000000c6700000| Complete 
+| 104|0x00000000c6800000, 0x00000000c6900000, 0x00000000c6900000|100%| E|CS|TAMS 0x00000000c6800000| PB 0x00000000c6800000| Complete 
+| 105|0x00000000c6900000, 0x00000000c6a00000, 0x00000000c6a00000|100%| E|CS|TAMS 0x00000000c6900000| PB 0x00000000c6900000| Complete 
+| 106|0x00000000c6a00000, 0x00000000c6b00000, 0x00000000c6b00000|100%| E|CS|TAMS 0x00000000c6a00000| PB 0x00000000c6a00000| Complete 
+| 107|0x00000000c6b00000, 0x00000000c6c00000, 0x00000000c6c00000|100%| E|CS|TAMS 0x00000000c6b00000| PB 0x00000000c6b00000| Complete 
+| 108|0x00000000c6c00000, 0x00000000c6d00000, 0x00000000c6d00000|100%| E|CS|TAMS 0x00000000c6c00000| PB 0x00000000c6c00000| Complete 
+| 109|0x00000000c6d00000, 0x00000000c6e00000, 0x00000000c6e00000|100%| E|CS|TAMS 0x00000000c6d00000| PB 0x00000000c6d00000| Complete 
+| 110|0x00000000c6e00000, 0x00000000c6f00000, 0x00000000c6f00000|100%| E|CS|TAMS 0x00000000c6e00000| PB 0x00000000c6e00000| Complete 
+| 111|0x00000000c6f00000, 0x00000000c7000000, 0x00000000c7000000|100%| E|CS|TAMS 0x00000000c6f00000| PB 0x00000000c6f00000| Complete 
+| 112|0x00000000c7000000, 0x00000000c7100000, 0x00000000c7100000|100%| E|CS|TAMS 0x00000000c7000000| PB 0x00000000c7000000| Complete 
+| 245|0x00000000cf500000, 0x00000000cf600000, 0x00000000cf600000|100%| E|CS|TAMS 0x00000000cf500000| PB 0x00000000cf500000| Complete 
+| 246|0x00000000cf600000, 0x00000000cf700000, 0x00000000cf700000|100%| E|CS|TAMS 0x00000000cf600000| PB 0x00000000cf600000| Complete 
+| 247|0x00000000cf700000, 0x00000000cf800000, 0x00000000cf800000|100%| E|CS|TAMS 0x00000000cf700000| PB 0x00000000cf700000| Complete 
+| 253|0x00000000cfd00000, 0x00000000cfe00000, 0x00000000cfe00000|100%| E|CS|TAMS 0x00000000cfd00000| PB 0x00000000cfd00000| Complete 
+|1021|0x00000000ffd00000, 0x00000000ffe00000, 0x00000000ffe00000|100%| O|  |TAMS 0x00000000ffd00000| PB 0x00000000ffd00000| Untracked 
+|1022|0x00000000ffe00000, 0x00000000fff00000, 0x00000000fff00000|100%| O|  |TAMS 0x00000000ffe00000| PB 0x00000000ffe00000| Untracked 
+|1023|0x00000000fff00000, 0x0000000100000000, 0x0000000100000000|100%| O|  |TAMS 0x00000000fff00000| PB 0x00000000fff00000| Untracked 
+
+Card table byte_map: [0x000001defbbc0000,0x000001defbdc0000] _byte_map_base: 0x000001defb5c0000
+
+Marking Bits: (CMBitMap*) 0x000001dee7a6a1a0
+ Bits: [0x000001defbdc0000, 0x000001defcdc0000)
+
+Polling page: 0x000001dee59f0000
+
+Metaspace:
+
+Usage:
+  Non-class:     98.07 MB used.
+      Class:     14.47 MB used.
+       Both:    112.54 MB used.
+
+Virtual space:
+  Non-class space:      128.00 MB reserved,      98.50 MB ( 77%) committed,  2 nodes.
+      Class space:        1.00 GB reserved,      14.81 MB (  1%) committed,  1 nodes.
+             Both:        1.12 GB reserved,     113.31 MB ( 10%) committed. 
+
+Chunk freelists:
+   Non-Class:  13.11 MB
+       Class:  1.04 MB
+        Both:  14.15 MB
+
+MaxMetaspaceSize: unlimited
+CompressedClassSpaceSize: 1.00 GB
+Initial GC threshold: 21.00 MB
+Current GC threshold: 159.69 MB
+CDS: off
+ - commit_granule_bytes: 65536.
+ - commit_granule_words: 8192.
+ - virtual_space_node_default_size: 8388608.
+ - enlarge_chunks_in_place: 1.
+ - use_allocation_guard: 0.
+
+
+Internal statistics:
+
+num_allocs_failed_limit: 15.
+num_arena_births: 1166.
+num_arena_deaths: 0.
+num_vsnodes_births: 3.
+num_vsnodes_deaths: 0.
+num_space_committed: 1810.
+num_space_uncommitted: 0.
+num_chunks_returned_to_freelist: 15.
+num_chunks_taken_from_freelist: 4895.
+num_chunk_merges: 15.
+num_chunk_splits: 3707.
+num_chunks_enlarged: 2992.
+num_inconsistent_stats: 0.
+
+CodeHeap 'non-profiled nmethods': size=120000Kb used=4661Kb max_used=4661Kb free=115338Kb
+ bounds [0x000001def4150000, 0x000001def45e0000, 0x000001defb680000]
+CodeHeap 'profiled nmethods': size=120000Kb used=13487Kb max_used=13487Kb free=106512Kb
+ bounds [0x000001deec680000, 0x000001deed3b0000, 0x000001def3bb0000]
+CodeHeap 'non-nmethods': size=5760Kb used=1919Kb max_used=2000Kb free=3841Kb
+ bounds [0x000001def3bb0000, 0x000001def3e20000, 0x000001def4150000]
+CodeCache: size=245760Kb, used=20067Kb, max_used=20148Kb, free=225691Kb
+ total_blobs=8741, nmethods=7838, adapters=805, full_count=0
+Compilation: enabled, stopped_count=0, restarted_count=0
+
+Compilation events (20 events):
+Event: 32744.171 Thread 0x000001deff91cfa0 8137       3       scala.concurrent.Future::mapTo (71 bytes)
+Event: 32744.173 Thread 0x000001deff91cfa0 nmethod 8137 0x000001deed348390 code [0x000001deed348600, 0x000001deed349130]
+Event: 32744.173 Thread 0x000001deff91cfa0 8141   !   3       org.apache.spark.rpc.netty.NettyRpcEnv::askAbortable (352 bytes)
+Event: 32744.196 Thread 0x000001deff91cfa0 nmethod 8141 0x000001deed349510 code [0x000001deed349c40, 0x000001deed34dc68]
+Event: 32744.196 Thread 0x000001deff91cfa0 8163       3       org.apache.spark.internal.Logging::logTrace (36 bytes)
+Event: 32744.196 Thread 0x000001deff91cfa0 nmethod 8163 0x000001deed34fa10 code [0x000001deed34fc20, 0x000001deed350230]
+Event: 32744.196 Thread 0x000001deff91cfa0 8157       3       scala.collection.MapLike::apply$ (6 bytes)
+Event: 32744.197 Thread 0x000001deff91cfa0 nmethod 8157 0x000001deed350390 code [0x000001deed350540, 0x000001deed3506c0]
+Event: 32744.197 Thread 0x000001deff91cfa0 8158       3       scala.collection.MapLike::apply (50 bytes)
+Event: 32744.197 Thread 0x000001deff91cfa0 nmethod 8158 0x000001deed350790 code [0x000001deed3509a0, 0x000001deed3510b8]
+Event: 32744.197 Thread 0x000001deff91cfa0 8150       3       org.apache.spark.rpc.netty.NettyRpcEnv$$anon$1::<init> (38 bytes)
+Event: 32744.197 Thread 0x000001deff91cfa0 nmethod 8150 0x000001deed351290 code [0x000001deed351440, 0x000001deed3517b8]
+Event: 32744.197 Thread 0x000001deff91cfa0 8164       3       java.lang.invoke.MethodTypeForm::findForm (24 bytes)
+Event: 32744.198 Thread 0x000001deff91cfa0 nmethod 8164 0x000001deed351890 code [0x000001deed351a60, 0x000001deed351ca0]
+Event: 32744.198 Thread 0x000001deff91cfa0 8136       1       org.apache.spark.HeartbeatReceiver::executorTimeoutMs (5 bytes)
+Event: 32744.198 Thread 0x000001deff91cfa0 nmethod 8136 0x000001def4588490 code [0x000001def4588620, 0x000001def45886e8]
+Event: 32744.291 Thread 0x000001de85e12590 8165   !   4       java.util.concurrent.ThreadPoolExecutor::getTask (177 bytes)
+Event: 32744.291 Thread 0x000001deff91cfa0 8166       3       java.util.concurrent.ThreadLocalRandom::getProbe (13 bytes)
+Event: 32744.292 Thread 0x000001deff91cfa0 nmethod 8166 0x000001deed351d90 code [0x000001deed351f20, 0x000001deed352030]
+Event: 32744.298 Thread 0x000001deff91c510 8167       4       java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue::add (9 bytes)
+
+GC Heap History (20 events):
+Event: 7.662 GC heap before
+{Heap before GC invocations=6 (full 0):
+ garbage-first heap   total 86016K, used 28438K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 2 young (2048K), 1 survivors (1024K)
+ Metaspace       used 36429K, committed 36736K, reserved 1114112K
+  class space    used 4438K, committed 4608K, reserved 1048576K
+}
+Event: 7.663 GC heap after
+{Heap after GC invocations=7 (full 0):
+ garbage-first heap   total 86016K, used 27810K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 1 young (1024K), 1 survivors (1024K)
+ Metaspace       used 36429K, committed 36736K, reserved 1114112K
+  class space    used 4438K, committed 4608K, reserved 1048576K
+}
+Event: 8.663 GC heap before
+{Heap before GC invocations=8 (full 0):
+ garbage-first heap   total 86016K, used 65698K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 39 young (39936K), 1 survivors (1024K)
+ Metaspace       used 46644K, committed 46976K, reserved 1114112K
+  class space    used 5732K, committed 5888K, reserved 1048576K
+}
+Event: 8.667 GC heap after
+{Heap after GC invocations=9 (full 0):
+ garbage-first heap   total 86016K, used 31129K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 4 young (4096K), 4 survivors (4096K)
+ Metaspace       used 46644K, committed 46976K, reserved 1114112K
+  class space    used 5732K, committed 5888K, reserved 1048576K
+}
+Event: 26.503 GC heap before
+{Heap before GC invocations=9 (full 0):
+ garbage-first heap   total 86016K, used 67993K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 41 young (41984K), 4 survivors (4096K)
+ Metaspace       used 54892K, committed 55232K, reserved 1114112K
+  class space    used 6683K, committed 6848K, reserved 1048576K
+}
+Event: 26.510 GC heap after
+{Heap after GC invocations=10 (full 0):
+ garbage-first heap   total 86016K, used 33989K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 3 young (3072K), 3 survivors (3072K)
+ Metaspace       used 54892K, committed 55232K, reserved 1114112K
+  class space    used 6683K, committed 6848K, reserved 1048576K
+}
+Event: 172.477 GC heap before
+{Heap before GC invocations=10 (full 0):
+ garbage-first heap   total 86016K, used 60613K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 31 young (31744K), 3 survivors (3072K)
+ Metaspace       used 60983K, committed 61376K, reserved 1114112K
+  class space    used 7365K, committed 7552K, reserved 1048576K
+}
+Event: 172.480 GC heap after
+{Heap after GC invocations=11 (full 0):
+ garbage-first heap   total 86016K, used 36204K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 3 young (3072K), 3 survivors (3072K)
+ Metaspace       used 60983K, committed 61376K, reserved 1114112K
+  class space    used 7365K, committed 7552K, reserved 1048576K
+}
+Event: 173.290 GC heap before
+{Heap before GC invocations=12 (full 0):
+ garbage-first heap   total 86016K, used 72044K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 38 young (38912K), 3 survivors (3072K)
+ Metaspace       used 71015K, committed 71424K, reserved 1114112K
+  class space    used 8818K, committed 9024K, reserved 1048576K
+}
+Event: 173.293 GC heap after
+{Heap after GC invocations=13 (full 0):
+ garbage-first heap   total 86016K, used 38407K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 5 young (5120K), 5 survivors (5120K)
+ Metaspace       used 71015K, committed 71424K, reserved 1114112K
+  class space    used 8818K, committed 9024K, reserved 1048576K
+}
+Event: 173.940 GC heap before
+{Heap before GC invocations=13 (full 0):
+ garbage-first heap   total 86016K, used 73223K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 39 young (39936K), 5 survivors (5120K)
+ Metaspace       used 80317K, committed 80704K, reserved 1179648K
+  class space    used 10093K, committed 10240K, reserved 1048576K
+}
+Event: 173.944 GC heap after
+{Heap after GC invocations=14 (full 0):
+ garbage-first heap   total 86016K, used 41021K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 5 young (5120K), 5 survivors (5120K)
+ Metaspace       used 80317K, committed 80704K, reserved 1179648K
+  class space    used 10093K, committed 10240K, reserved 1048576K
+}
+Event: 174.567 GC heap before
+{Heap before GC invocations=14 (full 0):
+ garbage-first heap   total 86016K, used 74813K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 38 young (38912K), 5 survivors (5120K)
+ Metaspace       used 90167K, committed 90624K, reserved 1179648K
+  class space    used 11316K, committed 11520K, reserved 1048576K
+}
+Event: 174.571 GC heap after
+{Heap after GC invocations=15 (full 0):
+ garbage-first heap   total 86016K, used 43751K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 3 young (3072K), 3 survivors (3072K)
+ Metaspace       used 90167K, committed 90624K, reserved 1179648K
+  class space    used 11316K, committed 11520K, reserved 1048576K
+}
+Event: 175.068 GC heap before
+{Heap before GC invocations=15 (full 0):
+ garbage-first heap   total 86016K, used 75495K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 34 young (34816K), 3 survivors (3072K)
+ Metaspace       used 97323K, committed 97856K, reserved 1179648K
+  class space    used 12311K, committed 12544K, reserved 1048576K
+}
+Event: 175.071 GC heap after
+{Heap after GC invocations=16 (full 0):
+ garbage-first heap   total 86016K, used 44941K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 4 young (4096K), 4 survivors (4096K)
+ Metaspace       used 97323K, committed 97856K, reserved 1179648K
+  class space    used 12311K, committed 12544K, reserved 1048576K
+}
+Event: 179.565 GC heap before
+{Heap before GC invocations=17 (full 0):
+ garbage-first heap   total 107520K, used 105357K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 34 young (34816K), 4 survivors (4096K)
+ Metaspace       used 101689K, committed 102464K, reserved 1179648K
+  class space    used 13100K, committed 13440K, reserved 1048576K
+}
+Event: 179.570 GC heap after
+{Heap after GC invocations=18 (full 0):
+ garbage-first heap   total 113664K, used 47270K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 4 young (4096K), 4 survivors (4096K)
+ Metaspace       used 101689K, committed 102464K, reserved 1179648K
+  class space    used 13100K, committed 13440K, reserved 1048576K
+}
+Event: 182.612 GC heap before
+{Heap before GC invocations=18 (full 0):
+ garbage-first heap   total 113664K, used 111782K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 51 young (52224K), 4 survivors (4096K)
+ Metaspace       used 114362K, committed 115136K, reserved 1179648K
+  class space    used 14752K, committed 15104K, reserved 1048576K
+}
+Event: 182.618 GC heap after
+{Heap after GC invocations=19 (full 0):
+ garbage-first heap   total 122880K, used 50866K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 8 young (8192K), 8 survivors (8192K)
+ Metaspace       used 114362K, committed 115136K, reserved 1179648K
+  class space    used 14752K, committed 15104K, reserved 1048576K
+}
+
+Dll operation events (12 events):
+Event: 0.006 Loaded shared library C:\Program Files\DBeaver\jre\bin\java.dll
+Event: 0.214 Loaded shared library C:\Program Files\DBeaver\jre\bin\net.dll
+Event: 0.215 Loaded shared library C:\Program Files\DBeaver\jre\bin\nio.dll
+Event: 0.221 Loaded shared library C:\Program Files\DBeaver\jre\bin\zip.dll
+Event: 0.749 Loaded shared library C:\Program Files\DBeaver\jre\bin\jimage.dll
+Event: 1.073 Loaded shared library C:\Program Files\DBeaver\jre\bin\management.dll
+Event: 1.077 Loaded shared library C:\Program Files\DBeaver\jre\bin\management_ext.dll
+Event: 6.715 Loaded shared library C:\Program Files\DBeaver\jre\bin\verify.dll
+Event: 7.092 Loaded shared library C:\Program Files\DBeaver\jre\bin\extnet.dll
+Event: 7.427 Loaded shared library C:\Program Files\DBeaver\jre\bin\jaas.dll
+Event: 7.742 Loaded shared library C:\Program Files\DBeaver\jre\bin\sunmscapi.dll
+Event: 175.220 Loaded shared library C:\Users\hariom\AppData\Local\Temp\liblz4-java-18296388362362694101.so
+
+Deoptimization events (20 events):
+Event: 32722.409 Thread 0x000001de85f33800 Uncommon trap: trap_request=0xffffffd6 fr.pc=0x000001def4575780 relative=0x0000000000000540
+Event: 32722.409 Thread 0x000001de85f33800 Uncommon trap: reason=array_check action=maybe_recompile pc=0x000001def4575780 method=scala.collection.mutable.HashTable.addEntry0(Lscala/collection/mutable/HashEntry;I)V @ 22 c2
+Event: 32722.409 Thread 0x000001de85f33800 DEOPT PACKING pc=0x000001def4575780 sp=0x000000dda40feca0
+Event: 32722.409 Thread 0x000001de85f33800 DEOPT UNPACKING pc=0x000001def3c046a2 sp=0x000000dda40febe8 mode 2
+Event: 32732.112 Thread 0x000001de85f310a0 Uncommon trap: trap_request=0xffffff45 fr.pc=0x000001def44e656c relative=0x0000000000000f0c
+Event: 32732.112 Thread 0x000001de85f310a0 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000001def44e656c method=java.util.concurrent.locks.AbstractQueuedSynchronizer.acquire(Ljava/util/concurrent/locks/AbstractQueuedSynchronizer$Node;IZZZJ)I @ 378 c2
+Event: 32732.112 Thread 0x000001de85f310a0 DEOPT PACKING pc=0x000001def44e656c sp=0x000000dda42fea10
+Event: 32732.112 Thread 0x000001de85f310a0 DEOPT UNPACKING pc=0x000001def3c046a2 sp=0x000000dda42fe9e8 mode 2
+Event: 32732.652 Thread 0x000001de85f33170 Uncommon trap: trap_request=0xffffff45 fr.pc=0x000001def456cb3c relative=0x000000000000081c
+Event: 32732.652 Thread 0x000001de85f33170 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000001def456cb3c method=java.lang.Thread.getAndClearInterrupt()Z @ 6 c2
+Event: 32732.652 Thread 0x000001de85f33170 DEOPT PACKING pc=0x000001def456cb3c sp=0x000000dda3cff460
+Event: 32732.652 Thread 0x000001de85f33170 DEOPT UNPACKING pc=0x000001def3c046a2 sp=0x000000dda3cff280 mode 2
+Event: 32744.132 Thread 0x000001de85f36c80 Uncommon trap: trap_request=0xffffff45 fr.pc=0x000001def45424ec relative=0x00000000000007ec
+Event: 32744.132 Thread 0x000001de85f36c80 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000001def45424ec method=java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.offer(Ljava/lang/Runnable;)Z @ 39 c2
+Event: 32744.132 Thread 0x000001de85f36c80 DEOPT PACKING pc=0x000001def45424ec sp=0x000000dda3bfe6f0
+Event: 32744.132 Thread 0x000001de85f36c80 DEOPT UNPACKING pc=0x000001def3c046a2 sp=0x000000dda3bfe6a8 mode 2
+Event: 32744.220 Thread 0x000001de85f36c80 Uncommon trap: trap_request=0xffffffbe fr.pc=0x000001def453ace0 relative=0x0000000000000560
+Event: 32744.220 Thread 0x000001de85f36c80 Uncommon trap: reason=profile_predicate action=maybe_recompile pc=0x000001def453ace0 method=java.util.stream.ReferencePipeline.forEachWithCancel(Ljava/util/Spliterator;Ljava/util/stream/Sink;)Z @ 8 c2
+Event: 32744.220 Thread 0x000001de85f36c80 DEOPT PACKING pc=0x000001def453ace0 sp=0x000000dda3bf8700
+Event: 32744.220 Thread 0x000001de85f36c80 DEOPT UNPACKING pc=0x000001def3c046a2 sp=0x000000dda3bf86d0 mode 2
+
+Classes loaded (20 events):
+Event: 182.503 Loading class java/lang/ref
+Event: 182.503 Loading class java/lang/ref done
+Event: 182.503 Loading class java/lang/ref/package
+Event: 182.503 Loading class java/lang/ref/package done
+Event: 182.529 Loading class java/lang/invoke
+Event: 182.529 Loading class java/lang/invoke done
+Event: 182.530 Loading class java/lang/invoke/package
+Event: 182.530 Loading class java/lang/invoke/package done
+Event: 182.575 Loading class java/lang/annotation
+Event: 182.575 Loading class java/lang/annotation done
+Event: 182.575 Loading class java/lang/annotation/package
+Event: 182.575 Loading class java/lang/annotation/package done
+Event: 182.575 Loading class java/lang/annotation
+Event: 182.575 Loading class java/lang/annotation done
+Event: 182.575 Loading class java/lang/annotation/package
+Event: 182.575 Loading class java/lang/annotation/package done
+Event: 182.576 Loading class java/lang/annotation/Repeatable
+Event: 182.576 Loading class java/lang/annotation/Repeatable done
+Event: 182.582 Loading class java/lang/FunctionalInterface
+Event: 182.582 Loading class java/lang/FunctionalInterface done
+
+Classes unloaded (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (20 events):
+Event: 182.467 Thread 0x000001deff917720 Exception <a 'java/lang/ClassNotFoundException'{0x00000000c4024e10}: scala/reflect/ScalaLongSignature> (0x00000000c4024e10) 
+thrown [s\src\hotspot\share\classfile\systemDictionary.cpp, line 312]
+Event: 182.468 Thread 0x000001deff917720 Exception <a 'java/lang/ClassNotFoundException'{0x00000000c40314d8}: scala/reflect/ScalaSignature> (0x00000000c40314d8) 
+thrown [s\src\hotspot\share\classfile\systemDictionary.cpp, line 312]
+Event: 182.468 Thread 0x000001deff917720 Exception <a 'java/lang/ClassNotFoundException'{0x00000000c4032588}: scala/reflect/ScalaLongSignature> (0x00000000c4032588) 
+thrown [s\src\hotspot\share\classfile\systemDictionary.cpp, line 312]
+Event: 182.469 Thread 0x000001deff917720 Exception <a 'java/lang/ClassNotFoundException'{0x00000000c403ad68}: scala/reflect/ScalaSignature> (0x00000000c403ad68) 
+thrown [s\src\hotspot\share\classfile\systemDictionary.cpp, line 312]
+Event: 182.469 Thread 0x000001deff917720 Exception <a 'java/lang/ClassNotFoundException'{0x00000000c403be18}: scala/reflect/ScalaLongSignature> (0x00000000c403be18) 
+thrown [s\src\hotspot\share\classfile\systemDictionary.cpp, line 312]
+Event: 182.469 Thread 0x000001deff917720 Exception <a 'java/lang/ClassNotFoundException'{0x00000000c403eec0}: scala/reflect/ScalaSignature> (0x00000000c403eec0) 
+thrown [s\src\hotspot\share\classfile\systemDictionary.cpp, line 312]
+Event: 182.470 Thread 0x000001deff917720 Exception <a 'java/lang/ClassNotFoundException'{0x00000000c403ff70}: scala/reflect/ScalaLongSignature> (0x00000000c403ff70) 
+thrown [s\src\hotspot\share\classfile\systemDictionary.cpp, line 312]
+Event: 182.470 Thread 0x000001deff917720 Exception <a 'java/lang/ClassNotFoundException'{0x00000000c404b2c0}: scala/reflect/ScalaSignature> (0x00000000c404b2c0) 
+thrown [s\src\hotspot\share\classfile\systemDictionary.cpp, line 312]
+Event: 182.470 Thread 0x000001deff917720 Exception <a 'java/lang/ClassNotFoundException'{0x00000000c404c370}: scala/reflect/ScalaLongSignature> (0x00000000c404c370) 
+thrown [s\src\hotspot\share\classfile\systemDictionary.cpp, line 312]
+Event: 182.471 Thread 0x000001deff917720 Exception <a 'java/lang/ClassNotFoundException'{0x00000000c404fde8}: scala/reflect/ScalaSignature> (0x00000000c404fde8) 
+thrown [s\src\hotspot\share\classfile\systemDictionary.cpp, line 312]
+Event: 182.471 Thread 0x000001deff917720 Exception <a 'java/lang/ClassNotFoundException'{0x00000000c4050e98}: scala/reflect/ScalaLongSignature> (0x00000000c4050e98) 
+thrown [s\src\hotspot\share\classfile\systemDictionary.cpp, line 312]
+Event: 182.471 Thread 0x000001deff917720 Exception <a 'java/lang/ClassNotFoundException'{0x00000000c4053290}: scala/reflect/ScalaSignature> (0x00000000c4053290) 
+thrown [s\src\hotspot\share\classfile\systemDictionary.cpp, line 312]
+Event: 182.471 Thread 0x000001deff917720 Exception <a 'java/lang/ClassNotFoundException'{0x00000000c4054340}: scala/reflect/ScalaLongSignature> (0x00000000c4054340) 
+thrown [s\src\hotspot\share\classfile\systemDictionary.cpp, line 312]
+Event: 182.471 Thread 0x000001deff917720 Exception <a 'java/lang/ClassNotFoundException'{0x00000000c4056b68}: scala/reflect/ScalaSignature> (0x00000000c4056b68) 
+thrown [s\src\hotspot\share\classfile\systemDictionary.cpp, line 312]
+Event: 182.471 Thread 0x000001deff917720 Exception <a 'java/lang/ClassNotFoundException'{0x00000000c4057c18}: scala/reflect/ScalaLongSignature> (0x00000000c4057c18) 
+thrown [s\src\hotspot\share\classfile\systemDictionary.cpp, line 312]
+Event: 182.488 Thread 0x000001deff917720 Exception <a 'java/lang/ClassNotFoundException'{0x00000000c3f01f50}: java/rmi> (0x00000000c3f01f50) 
+thrown [s\src\hotspot\share\classfile\systemDictionary.cpp, line 312]
+Event: 182.489 Thread 0x000001deff917720 Exception <a 'java/lang/ClassNotFoundException'{0x00000000c3f03200}: java/rmi/package> (0x00000000c3f03200) 
+thrown [s\src\hotspot\share\classfile\systemDictionary.cpp, line 312]
+Event: 182.575 Thread 0x000001deff917720 Exception <a 'java/lang/ClassNotFoundException'{0x00000000c3b45648}: java/lang/annotation> (0x00000000c3b45648) 
+thrown [s\src\hotspot\share\classfile\systemDictionary.cpp, line 312]
+Event: 182.575 Thread 0x000001deff917720 Exception <a 'java/lang/ClassNotFoundException'{0x00000000c3b46930}: java/lang/annotation/package> (0x00000000c3b46930) 
+thrown [s\src\hotspot\share\classfile\systemDictionary.cpp, line 312]
+Event: 182.645 Thread 0x000001de85f365f0 Exception <a 'java/lang/NoSuchMethodError'{0x00000000cf6e0890}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.newInvokeSpecial(java.lang.Object, long, int, int, long)'> (0x00000000cf6e0890) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 773]
+
+ZGC Phase Switch (0 events):
+No events
+
+VM Operations (20 events):
+Event: 1256.543 Executing VM operation: Cleanup
+Event: 1256.543 Executing VM operation: Cleanup done
+Event: 1304.886 Executing VM operation: Cleanup
+Event: 1304.886 Executing VM operation: Cleanup done
+Event: 1357.258 Executing VM operation: Cleanup
+Event: 1357.258 Executing VM operation: Cleanup done
+Event: 32719.846 Executing VM operation: Cleanup
+Event: 32719.887 Executing VM operation: Cleanup done
+Event: 32720.895 Executing VM operation: Cleanup
+Event: 32720.996 Executing VM operation: Cleanup done
+Event: 32722.005 Executing VM operation: Cleanup
+Event: 32722.046 Executing VM operation: Cleanup done
+Event: 32723.047 Executing VM operation: Cleanup
+Event: 32723.080 Executing VM operation: Cleanup done
+Event: 32729.150 Executing VM operation: Cleanup
+Event: 32729.150 Executing VM operation: Cleanup done
+Event: 32733.188 Executing VM operation: Cleanup
+Event: 32733.188 Executing VM operation: Cleanup done
+Event: 32744.227 Executing VM operation: Cleanup
+Event: 32744.248 Executing VM operation: Cleanup done
+
+Memory protections (0 events):
+No events
+
+Nmethod flushes (20 events):
+Event: 175.095 Thread 0x000001deff875fc0 flushing  nmethod 0x000001deec828a90
+Event: 175.095 Thread 0x000001deff875fc0 flushing  nmethod 0x000001deec8c6810
+Event: 175.095 Thread 0x000001deff875fc0 flushing  nmethod 0x000001deec8ca690
+Event: 175.095 Thread 0x000001deff875fc0 flushing  nmethod 0x000001deec911090
+Event: 175.095 Thread 0x000001deff875fc0 flushing  nmethod 0x000001deec912b90
+Event: 175.095 Thread 0x000001deff875fc0 flushing  nmethod 0x000001deec96a390
+Event: 175.095 Thread 0x000001deff875fc0 flushing  nmethod 0x000001deec96a810
+Event: 175.095 Thread 0x000001deff875fc0 flushing  nmethod 0x000001deec96ba10
+Event: 175.095 Thread 0x000001deff875fc0 flushing  nmethod 0x000001deec96c390
+Event: 175.095 Thread 0x000001deff875fc0 flushing  nmethod 0x000001deec980090
+Event: 175.095 Thread 0x000001deff875fc0 flushing  nmethod 0x000001deec980e10
+Event: 175.095 Thread 0x000001deff875fc0 flushing  nmethod 0x000001deec9b4590
+Event: 175.095 Thread 0x000001deff875fc0 flushing  nmethod 0x000001deec9b5d10
+Event: 175.095 Thread 0x000001deff875fc0 flushing  nmethod 0x000001deeca2a810
+Event: 175.095 Thread 0x000001deff875fc0 flushing  nmethod 0x000001deeca8db10
+Event: 175.095 Thread 0x000001deff875fc0 flushing  nmethod 0x000001deecb18a10
+Event: 175.095 Thread 0x000001deff875fc0 flushing  nmethod 0x000001deecb46e10
+Event: 175.095 Thread 0x000001deff875fc0 flushing  nmethod 0x000001deecba2410
+Event: 175.095 Thread 0x000001deff875fc0 flushing  nmethod 0x000001deecbf9f10
+Event: 175.095 Thread 0x000001deff875fc0 flushing  nmethod 0x000001deeca11a90
+
+Events (20 events):
+Event: 239.615 Thread 0x000001de87e0ab50 Thread exited: 0x000001de87e0ab50
+Event: 239.615 Thread 0x000001de87e04250 Thread exited: 0x000001de87e04250
+Event: 239.615 Thread 0x000001de87e083f0 Thread exited: 0x000001de87e083f0
+Event: 239.615 Thread 0x000001de87e03bc0 Thread exited: 0x000001de87e03bc0
+Event: 239.615 Thread 0x000001de87e048e0 Thread exited: 0x000001de87e048e0
+Event: 239.615 Thread 0x000001de87e09110 Thread exited: 0x000001de87e09110
+Event: 239.630 Thread 0x000001de87e08a80 Thread exited: 0x000001de87e08a80
+Event: 239.630 Thread 0x000001de87e069b0 Thread exited: 0x000001de87e069b0
+Event: 239.630 Thread 0x000001de87e07d60 Thread exited: 0x000001de87e07d60
+Event: 241.784 Thread 0x000001de88426df0 Thread exited: 0x000001de88426df0
+Event: 241.784 Thread 0x000001de8842a270 Thread exited: 0x000001de8842a270
+Event: 241.846 Thread 0x000001de88429550 Thread exited: 0x000001de88429550
+Event: 242.625 Thread 0x000001de87e05600 Thread exited: 0x000001de87e05600
+Event: 242.625 Thread 0x000001de87e06320 Thread exited: 0x000001de87e06320
+Event: 242.625 Thread 0x000001de87e05c90 Thread exited: 0x000001de87e05c90
+Event: 242.625 Thread 0x000001de8958f5a0 Thread exited: 0x000001de8958f5a0
+Event: 242.625 Thread 0x000001de87e04f70 Thread exited: 0x000001de87e04f70
+Event: 32719.567 Thread 0x000001deff91cfa0 Thread added: 0x000001de87ed7450
+Event: 32720.148 Thread 0x000001de87ed7450 Thread exited: 0x000001de87ed7450
+Event: 32744.159 Thread 0x000001deff91cfa0 Thread added: 0x000001de85e12590
+
+
+Dynamic libraries:
+0x00007ff6dd6a0000 - 0x00007ff6dd6ae000 	C:\Program Files\DBeaver\jre\bin\java.exe
+0x00007ffa47e50000 - 0x00007ffa48048000 	C:\Windows\SYSTEM32\ntdll.dll
+0x00007ffa46400000 - 0x00007ffa464c2000 	C:\Windows\System32\KERNEL32.DLL
+0x00007ffa45ac0000 - 0x00007ffa45db6000 	C:\Windows\System32\KERNELBASE.dll
+0x00007ffa458b0000 - 0x00007ffa459b0000 	C:\Windows\System32\ucrtbase.dll
+0x00007ff9f1f10000 - 0x00007ff9f1f2e000 	C:\Program Files\DBeaver\jre\bin\VCRUNTIME140.dll
+0x00007ff9e1b00000 - 0x00007ff9e1b18000 	C:\Program Files\DBeaver\jre\bin\jli.dll
+0x00007ffa47c60000 - 0x00007ffa47e01000 	C:\Windows\System32\USER32.dll
+0x00007ffa29890000 - 0x00007ffa29b2b000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.6456_none_60b8a6cb71f64256\COMCTL32.dll
+0x00007ffa459b0000 - 0x00007ffa459d2000 	C:\Windows\System32\win32u.dll
+0x00007ffa46970000 - 0x00007ffa46a0e000 	C:\Windows\System32\msvcrt.dll
+0x00007ffa461d0000 - 0x00007ffa461fb000 	C:\Windows\System32\GDI32.dll
+0x00007ffa454e0000 - 0x00007ffa455f9000 	C:\Windows\System32\gdi32full.dll
+0x00007ffa45810000 - 0x00007ffa458ad000 	C:\Windows\System32\msvcp_win.dll
+0x00007ffa46ba0000 - 0x00007ffa46bcf000 	C:\Windows\System32\IMM32.DLL
+0x00007ff9ee000000 - 0x00007ff9ee00c000 	C:\Program Files\DBeaver\jre\bin\vcruntime140_1.dll
+0x00007ff9e1a70000 - 0x00007ff9e1afd000 	C:\Program Files\DBeaver\jre\bin\msvcp140.dll
+0x00007ff9b7a40000 - 0x00007ff9b87d7000 	C:\Program Files\DBeaver\jre\bin\server\jvm.dll
+0x00007ffa46bd0000 - 0x00007ffa46c81000 	C:\Windows\System32\ADVAPI32.dll
+0x00007ffa462a0000 - 0x00007ffa4633f000 	C:\Windows\System32\sechost.dll
+0x00007ffa471f0000 - 0x00007ffa47310000 	C:\Windows\System32\RPCRT4.dll
+0x00007ffa457e0000 - 0x00007ffa45807000 	C:\Windows\System32\bcrypt.dll
+0x00007ffa46f70000 - 0x00007ffa46fdb000 	C:\Windows\System32\WS2_32.dll
+0x00007ffa449e0000 - 0x00007ffa44a2b000 	C:\Windows\SYSTEM32\POWRPROF.dll
+0x00007ffa308e0000 - 0x00007ffa30907000 	C:\Windows\SYSTEM32\WINMM.dll
+0x00007ffa395c0000 - 0x00007ffa395ca000 	C:\Windows\SYSTEM32\VERSION.dll
+0x00007ffa448a0000 - 0x00007ffa448b2000 	C:\Windows\SYSTEM32\UMPDC.dll
+0x00007ffa43cb0000 - 0x00007ffa43cc2000 	C:\Windows\SYSTEM32\kernel.appcore.dll
+0x00007ff9edf70000 - 0x00007ff9edf7a000 	C:\Program Files\DBeaver\jre\bin\jimage.dll
+0x00007ffa431d0000 - 0x00007ffa433d1000 	C:\Windows\SYSTEM32\DBGHELP.DLL
+0x00007ffa308a0000 - 0x00007ffa308d4000 	C:\Windows\SYSTEM32\dbgcore.DLL
+0x00007ffa45a30000 - 0x00007ffa45ab2000 	C:\Windows\System32\bcryptPrimitives.dll
+0x00007ff9e1a50000 - 0x00007ff9e1a6f000 	C:\Program Files\DBeaver\jre\bin\java.dll
+0x00007ffa473d0000 - 0x00007ffa47b40000 	C:\Windows\System32\SHELL32.dll
+0x00007ffa433e0000 - 0x00007ffa43b85000 	C:\Windows\SYSTEM32\windows.storage.dll
+0x00007ffa45e70000 - 0x00007ffa461c4000 	C:\Windows\System32\combase.dll
+0x00007ffa44e30000 - 0x00007ffa44e5b000 	C:\Windows\SYSTEM32\Wldp.dll
+0x00007ffa47040000 - 0x00007ffa4710d000 	C:\Windows\System32\OLEAUT32.dll
+0x00007ffa46a90000 - 0x00007ffa46b3d000 	C:\Windows\System32\SHCORE.dll
+0x00007ffa46340000 - 0x00007ffa4639b000 	C:\Windows\System32\shlwapi.dll
+0x00007ffa45410000 - 0x00007ffa45434000 	C:\Windows\SYSTEM32\profapi.dll
+0x00007ff9edd00000 - 0x00007ff9edd10000 	C:\Program Files\DBeaver\jre\bin\net.dll
+0x00007ffa41600000 - 0x00007ffa4170a000 	C:\Windows\SYSTEM32\WINHTTP.dll
+0x00007ffa44c10000 - 0x00007ffa44c7a000 	C:\Windows\system32\mswsock.dll
+0x00007ff9e1a30000 - 0x00007ff9e1a46000 	C:\Program Files\DBeaver\jre\bin\nio.dll
+0x00007ff9e1a10000 - 0x00007ff9e1a28000 	C:\Program Files\DBeaver\jre\bin\zip.dll
+0x00007ff9edba0000 - 0x00007ff9edbaa000 	C:\Program Files\DBeaver\jre\bin\management.dll
+0x00007ff9ed6d0000 - 0x00007ff9ed6db000 	C:\Program Files\DBeaver\jre\bin\management_ext.dll
+0x00007ffa46290000 - 0x00007ffa46298000 	C:\Windows\System32\PSAPI.DLL
+0x00007ffa1bfb0000 - 0x00007ffa1bfc7000 	C:\Windows\system32\napinsp.dll
+0x00007ffa1bf90000 - 0x00007ffa1bfab000 	C:\Windows\system32\pnrpnsp.dll
+0x00007ffa41730000 - 0x00007ffa4174d000 	C:\Windows\system32\wshbth.dll
+0x00007ffa415e0000 - 0x00007ffa415fd000 	C:\Windows\system32\NLAapi.dll
+0x00007ffa448c0000 - 0x00007ffa448fb000 	C:\Windows\SYSTEM32\IPHLPAPI.DLL
+0x00007ffa44910000 - 0x00007ffa449da000 	C:\Windows\SYSTEM32\DNSAPI.dll
+0x00007ffa473c0000 - 0x00007ffa473c8000 	C:\Windows\System32\NSI.dll
+0x00007ffa1bf70000 - 0x00007ffa1bf82000 	C:\Windows\System32\winrnr.dll
+0x00007ffa3e340000 - 0x00007ffa3e34a000 	C:\Windows\System32\rasadhlp.dll
+0x00007ffa3c4f0000 - 0x00007ffa3c570000 	C:\Windows\System32\fwpuclnt.dll
+0x00007ff9ed510000 - 0x00007ff9ed520000 	C:\Program Files\DBeaver\jre\bin\verify.dll
+0x00007ffa44e70000 - 0x00007ffa44e88000 	C:\Windows\SYSTEM32\CRYPTSP.dll
+0x00007ffa444e0000 - 0x00007ffa44518000 	C:\Windows\system32\rsaenh.dll
+0x00007ffa45390000 - 0x00007ffa453be000 	C:\Windows\SYSTEM32\USERENV.dll
+0x00007ffa44da0000 - 0x00007ffa44dac000 	C:\Windows\SYSTEM32\CRYPTBASE.dll
+0x00007ff9ed030000 - 0x00007ff9ed039000 	C:\Program Files\DBeaver\jre\bin\extnet.dll
+0x00007ff9ebf30000 - 0x00007ff9ebf39000 	C:\Program Files\DBeaver\jre\bin\jaas.dll
+0x00007ff9ebe70000 - 0x00007ff9ebe7e000 	C:\Program Files\DBeaver\jre\bin\sunmscapi.dll
+0x00007ffa45680000 - 0x00007ffa457dd000 	C:\Windows\System32\CRYPT32.dll
+0x00007ffa44f80000 - 0x00007ffa44fa7000 	C:\Windows\SYSTEM32\ncrypt.dll
+0x00007ffa44f40000 - 0x00007ffa44f7b000 	C:\Windows\SYSTEM32\NTASN1.dll
+0x00007ff9dd280000 - 0x00007ff9dd287000 	C:\Windows\system32\wshunix.dll
+0x0000000066f40000 - 0x0000000066fc4000 	C:\Users\hariom\AppData\Local\Temp\liblz4-java-18296388362362694101.so
+
+JVMTI agents: none
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Program Files\DBeaver\jre\bin;C:\Windows\SYSTEM32;C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.6456_none_60b8a6cb71f64256;C:\Program Files\DBeaver\jre\bin\server;C:\Users\hariom\AppData\Local\Temp
+
+VM Arguments:
+jvm_args: -Xmx1g -XX:+IgnoreUnrecognizedVMOptions --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.invoke=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.base/java.net=ALL-UNNAMED --add-opens=java.base/java.nio=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens=java.base/jdk.internal.ref=ALL-UNNAMED --add-opens=java.base/sun.nio.ch=ALL-UNNAMED --add-opens=java.base/sun.nio.cs=ALL-UNNAMED --add-opens=java.base/sun.security.action=ALL-UNNAMED --add-opens=java.base/sun.util.calendar=ALL-UNNAMED --add-opens=java.security.jgss/sun.security.krb5=ALL-UNNAMED -Djdk.reflect.useDirectMethodHandle=false 
+java_command: org.apache.spark.deploy.SparkSubmit --conf spark.master=local[*] --conf spark.app.name=Day02_PracticeQuestions --conf spark.sql.shuffle.partitions=4 --conf spark.ui.showConsoleProgress=false pyspark-shell
+java_class_path (initial): C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\conf;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\activation-1.1.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\aircompressor-0.27.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\algebra_2.12-2.0.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\annotations-17.0.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\antlr-runtime-3.5.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\antlr4-runtime-4.9.3.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\aopalliance-repackaged-2.6.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\arpack-3.0.3.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\arpack_combined_all-0.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\arrow-format-12.0.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\arrow-memory-core-12.0.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\arrow-memory-netty-12.0.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\arrow-vector-12.0.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\audience-annotations-0.5.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\avro-1.11.4.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\avro-ipc-1.11.4.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\avro-mapred-1.11.4.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\blas-3.0.3.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\bonecp-0.8.0.RELEASE.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\breeze-macros_2.12-2.1.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\breeze_2.12-2.1.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\cats-kernel_2.12-2.1.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\chill-java-0.10.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\chill_2.12-0.10.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\commons-cli-1.5.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\commons-codec-1.16.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\commons-collections-3.2.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\commons-collections4-4.4.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\commons-compiler-3.1.9.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\commons-compress-1.23.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\commons-crypto-1.1.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\commons-dbcp-1.4.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\commons-io-2.16.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\commons-lang-2.6.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\commons-lang3-3.12.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\commons-logging-1.1.3.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\commons-math3-3.6.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\commons-pool-1.5.4.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\commons-text-1.10.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\compress-lzf-1.1.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\curator-client-2.13.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\curator-framework-2.13.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\curator-recipes-2.13.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\datanucleus-api-jdo-4.2.4.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\datanucleus-core-4.1.17.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\datanucleus-rdbms-4.1.19.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\datasketches-java-3.3.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\datasketches-memory-2.1.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\derby-10.14.2.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\dropwizard-metrics-hadoop-metrics2-reporter-0.1.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\flatbuffers-java-1.12.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\gson-2.2.4.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\guava-14.0.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\hadoop-client-api-3.3.4.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\hadoop-client-runtime-3.3.4.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\hadoop-shaded-guava-1.1.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\hadoop-yarn-server-web-proxy-3.3.4.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\HikariCP-2.5.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\hive-beeline-2.3.9.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\hive-cli-2.3.9.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\hive-common-2.3.9.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\hive-exec-2.3.9-core.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\hive-jdbc-2.3.9.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\hive-llap-common-2.3.9.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\hive-metastore-2.3.9.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\hive-serde-2.3.9.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\hive-service-rpc-3.1.3.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\hive-shims-0.23-2.3.9.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\hive-shims-2.3.9.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\hive-shims-common-2.3.9.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\hive-shims-scheduler-2.3.9.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\hive-storage-api-2.8.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\hk2-api-2.6.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\hk2-locator-2.6.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\hk2-utils-2.6.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\httpclient-4.5.14.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\httpcore-4.4.16.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\istack-commons-runtime-3.0.8.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\ivy-2.5.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\jackson-annotations-2.15.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\jackson-core-2.15.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\jackson-core-asl-1.9.13.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\jackson-databind-2.15.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\jackson-dataformat-yaml-2.15.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\jackson-datatype-jsr310-2.15.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\jackson-mapper-asl-1.9.13.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\jackson-module-scala_2.12-2.15.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\jakarta.annotation-api-1.3.5.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\jakarta.inject-2.6.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\jakarta.servlet-api-4.0.3.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\jakarta.validation-api-2.0.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\jakarta.ws.rs-api-2.1.6.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\jakarta.xml.bind-api-2.3.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\janino-3.1.9.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\javassist-3.29.2-GA.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\javax.jdo-3.2.0-m3.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\javolution-5.5.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\jaxb-runtime-2.3.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\jcl-over-slf4j-2.0.7.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\jdo-api-3.0.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\jersey-client-2.40.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\jersey-common-2.40.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\jersey-container-servlet-2.40.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\jersey-container-servlet-core-2.40.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\jersey-hk2-2.40.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\jersey-server-2.40.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\JLargeArrays-1.5.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\jline-2.14.6.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\joda-time-2.12.5.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\jodd-core-3.5.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\jpam-1.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\json-1.8.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\json4s-ast_2.12-3.7.0-M11.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\json4s-core_2.12-3.7.0-M11.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\json4s-jackson_2.12-3.7.0-M11.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\json4s-scalap_2.12-3.7.0-M11.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\jsr305-3.0.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\jta-1.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\JTransforms-3.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\jul-to-slf4j-2.0.7.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\kryo-shaded-4.0.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\kubernetes-client-6.7.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\kubernetes-client-api-6.7.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\kubernetes-httpclient-okhttp-6.7.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\kubernetes-model-admissionregistration-6.7.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\kubernetes-model-apiextensions-6.7.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\kubernetes-model-apps-6.7.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\kubernetes-model-autoscaling-6.7.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\kubernetes-model-batch-6.7.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\kubernetes-model-certificates-6.7.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\kubernetes-model-common-6.7.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\kubernetes-model-coordination-6.7.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\kubernetes-model-core-6.7.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\kubernetes-model-discovery-6.7.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\kubernetes-model-events-6.7.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\kubernetes-model-extensions-6.7.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\kubernetes-model-flowcontrol-6.7.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\kubernetes-model-gatewayapi-6.7.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\kubernetes-model-metrics-6.7.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\kubernetes-model-networking-6.7.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\kubernetes-model-node-6.7.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\kubernetes-model-policy-6.7.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\kubernetes-model-rbac-6.7.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\kubernetes-model-resource-6.7.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\kubernetes-model-scheduling-6.7.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\kubernetes-model-storageclass-6.7.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\lapack-3.0.3.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\leveldbjni-all-1.8.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\libfb303-0.9.3.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\libthrift-0.12.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\log4j-1.2-api-2.20.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\log4j-api-2.20.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\log4j-core-2.20.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\log4j-slf4j2-impl-2.20.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\logging-interceptor-3.12.12.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\lz4-java-1.8.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\mesos-1.4.3-shaded-protobuf.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\metrics-core-4.2.19.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\metrics-graphite-4.2.19.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\metrics-jmx-4.2.19.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\metrics-json-4.2.19.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\metrics-jvm-4.2.19.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\minlog-1.3.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\netty-all-4.1.96.Final.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\netty-buffer-4.1.96.Final.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\netty-codec-4.1.96.Final.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\netty-codec-http-4.1.96.Final.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\netty-codec-http2-4.1.96.Final.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\netty-codec-socks-4.1.96.Final.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\netty-common-4.1.96.Final.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\netty-handler-4.1.96.Final.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\netty-handler-proxy-4.1.96.Final.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\netty-resolver-4.1.96.Final.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\netty-transport-4.1.96.Final.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\netty-transport-classes-epoll-4.1.96.Final.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\netty-transport-classes-kqueue-4.1.96.Final.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\netty-transport-native-epoll-4.1.96.Final-linux-aarch_64.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\netty-transport-native-epoll-4.1.96.Final-linux-x86_64.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\netty-transport-native-kqueue-4.1.96.Final-osx-aarch_64.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\netty-transport-native-kqueue-4.1.96.Final-osx-x86_64.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\netty-transport-native-unix-common-4.1.96.Final.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\objenesis-3.3.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\okhttp-3.12.12.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\okio-1.17.6.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\opencsv-2.3.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\orc-core-1.9.6-shaded-protobuf.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\orc-mapreduce-1.9.6-shaded-protobuf.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\orc-shims-1.9.6.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\oro-2.0.8.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\osgi-resource-locator-1.0.3.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\paranamer-2.8.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\parquet-column-1.13.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\parquet-common-1.13.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\parquet-encoding-1.13.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\parquet-format-structures-1.13.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\parquet-hadoop-1.13.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\parquet-jackson-1.13.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\pickle-1.3.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\py4j-0.10.9.7.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\RoaringBitmap-0.9.45.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\rocksdbjni-8.3.2.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\scala-collection-compat_2.12-2.7.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\scala-compiler-2.12.18.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\scala-library-2.12.18.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\scala-parser-combinators_2.12-2.3.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\scala-reflect-2.12.18.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\scala-xml_2.12-2.1.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\shims-0.9.45.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\slf4j-api-2.0.7.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\snakeyaml-2.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\snakeyaml-engine-2.6.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\snappy-java-1.1.10.5.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\spark-catalyst_2.12-3.5.6.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\spark-common-utils_2.12-3.5.6.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\spark-core_2.12-3.5.6.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\spark-graphx_2.12-3.5.6.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\spark-hive-thriftserver_2.12-3.5.6.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\spark-hive_2.12-3.5.6.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\spark-kubernetes_2.12-3.5.6.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\spark-kvstore_2.12-3.5.6.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\spark-launcher_2.12-3.5.6.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\spark-mesos_2.12-3.5.6.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\spark-mllib-local_2.12-3.5.6.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\spark-mllib_2.12-3.5.6.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\spark-network-common_2.12-3.5.6.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\spark-network-shuffle_2.12-3.5.6.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\spark-repl_2.12-3.5.6.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\spark-sketch_2.12-3.5.6.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\spark-sql-api_2.12-3.5.6.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\spark-sql_2.12-3.5.6.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\spark-streaming_2.12-3.5.6.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\spark-tags_2.12-3.5.6.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\spark-unsafe_2.12-3.5.6.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\spark-yarn_2.12-3.5.6.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\spire-macros_2.12-0.17.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\spire-platform_2.12-0.17.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\spire-util_2.12-0.17.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\spire_2.12-0.17.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\ST4-4.0.4.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\stax-api-1.0.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\stream-2.9.6.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\super-csv-2.2.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\threeten-extra-1.7.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\tink-1.9.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\transaction-api-1.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\univocity-parsers-2.9.1.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\xbean-asm9-shaded-4.23.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\xz-1.9.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\zjsonpatch-0.3.0.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\zookeeper-3.6.3.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\zookeeper-jute-3.6.3.jar;C:\Users\hariom\AppData\Local\Programs\Python\Python311\Lib\site-packages\pyspark\bin\..\jars\zstd-jni-1.5.5-4.jar
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 4                                         {product} {ergonomic}
+     uint ConcGCThreads                            = 2                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 8                                         {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 1048576                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+     bool IgnoreUnrecognizedVMOptions              = true                                      {product} {command line}
+   size_t InitialHeapSize                          = 266338304                                 {product} {ergonomic}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 1073741824                                {product} {command line}
+   size_t MaxNewSize                               = 643825664                                 {product} {ergonomic}
+   size_t MinHeapDeltaBytes                        = 1048576                                   {product} {ergonomic}
+   size_t MinHeapSize                              = 8388608                                   {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 5839372                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122909434                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122909434                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+   size_t SoftMaxHeapSize                          = 1073741824                             {manageable} {ergonomic}
+     bool UseCompressedOops                        = true                           {product lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags foldmultilines=false
+ #1: stderr all=off uptime,level,tags foldmultilines=false
+
+Environment Variables:
+JAVA_HOME=C:/Program Files/DBeaver/jre
+PATH=C:\Users\hariom\Downloads\python_sql_pyspark\myenv\Scripts;c:\Users\hariom\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;c:\Users\hariom\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\copilotCli;C:\Python313\Scripts\;C:\Python313\;C:\Python311\Scripts\;C:\Python311\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\pstaf\drivers;C:\Katalon_C;C:\Program Files\Git\cmd;C:\Katalon_Studio_Engine_Windows_64-8.3.5;C:\Users\hariom\AppData\Local\Programs\Python\Python37\Scripts\;C:\Users\hariom\AppData\Local\Programs\Python\Python37;C:\Program Files (x86)\DVC (Data Version Control);C:\ProgramData\chocolatey\bin;C:\tools;C:\Program Files\Kubernetes\Minikube;C:\Users\hariom\AppData\Local\Programs\Python\Python310;C:\Users\install\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\ProgramData\ComposerSetup\bin;C:\xampp\php;C:\Program Files\nodejs\;C:\Program Files (x86)\Microsoft SQL Server\160\Tools\Binn\;C:\Program Files\Microsoft SQL Server\160\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\Microsoft SQL Server\160\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\170\DTS\Binn\;C:\Program Files\Microsoft SQL Server\170\DTS\Binn\;C:\Program Files\Microsoft SQL Server\170\Tools\Binn\;C:\Program Files\Microsoft SQL Server\130\DTS\Binn\;C:\Program Files\Microsoft SQL Server\140\DTS\Binn\;C:\Program Files\Microsoft SQL Server\150\DTS\Binn\;C:\Python311\Scripts\;C:\Python311\;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\pstaf\drivers;C:\Katalon_C;C:\Program Files\Git\cmd;C:\Katalon_Studio_Engine_Windows_64-8.3.5;C:\Users\hariom\AppData\Local\Programs\Python\Python37\Scripts\;C:\Users\hariom\AppData\Local\Programs\Python\Python37;C:\Program Files\Go\bin;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files (x86)\DVC (Data Version Control);C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\tools;C:\Program Files\Kubernetes\Minikube;C:\Program Files\Amazon\AWSCLIV2\;C:\Python311\Scripts\;C:\Python311\;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\pstaf\drivers;C:\Katalon_C;C:\Program Files (x86)\Pulse Secure\VC142.CRT\X64\;C:\Program Files (x86)\Pulse Secure\VC142;C:\Users\hariom\AppData\Local\Programs\Microsoft VS Code\bin;c:\users\hariom\.local\bin;C:\Users\hariom\AppData\Roaming\npm;c:\Users\hariom\.vscode\extensions\ms-python.debugpy-2026.6.0-win32-x64\bundled\scripts\noConfigScripts
+USERNAME=hariom
+LANG=en_US.UTF-8
+TERM=xterm-color
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 165 Stepping 2, GenuineIntel
+TMP=C:\Users\hariom\AppData\Local\Temp
+TEMP=C:\Users\hariom\AppData\Local\Temp
+
+
+
+
+Periodic native trim disabled
+
+---------------  S Y S T E M  ---------------
+
+OS:
+ Windows 10 , 64 bit Build 19041 (10.0.19041.5915)
+OS uptime: 3 days 0:55 hours
+Hyper-V role detected
+
+CPU: total 8 (initial active 8) (4 cores per cpu, 2 threads per core) family 6 model 165 stepping 2 microcode 0xf0, cx8, cmov, fxsr, ht, mmx, 3dnowpref, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, lzcnt, tsc, tscinvbit, avx, avx2, aes, erms, clmul, bmi1, bmi2, adx, fma, vzeroupper, clflush, clflushopt, hv, rdtscp, f16c
+Processor Information for the first 8 processors :
+  Max Mhz: 2496, Current Mhz: 2496, Mhz Limit: 2496
+
+Memory: 4k page, system-wide physical 16177M (610M free)
+TotalPageFile size 46625M (AvailPageFile size 181M)
+current process WorkingSet (physical memory assigned to process): 197M, peak: 351M
+current process commit charge ("private bytes"): 428M, peak: 437M
+
+vm_info: OpenJDK 64-Bit Server VM (21.0.8+9-LTS) for windows-amd64 JRE (21.0.8+9-LTS), built on 2025-07-15T00:00:00Z by "admin" with MS VC++ 17.7 (VS2022)
+
+END.
