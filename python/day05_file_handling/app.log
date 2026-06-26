@@ -1,0 +1,12 @@
+2024-01-10 09:00:01 INFO  Server started on port 8080
+2024-01-10 09:01:15 INFO  User alice logged in
+2024-01-10 09:02:30 ERROR Database connection timeout after 30s
+2024-01-10 09:03:05 INFO  Retrying database connection
+2024-01-10 09:03:08 INFO  Database connected
+2024-01-10 09:04:20 ERROR Failed to process payment for order #1234
+2024-01-10 09:05:00 INFO  Cache cleared successfully
+2024-01-10 09:06:45 ERROR Disk space below 10% threshold
+2024-01-10 09:07:30 INFO  Backup job started
+2024-01-10 09:08:00 INFO  Backup job completed
+2024-01-10 09:09:12 ERROR API rate limit exceeded for service: payments
+2024-01-10 09:10:00 INFO  Scheduled maintenance window starting

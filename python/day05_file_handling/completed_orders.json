@@ -1,0 +1,26 @@
+[
+  {
+    "order_id": 1,
+    "customer": "Alice",
+    "amount": 250.0,
+    "status": "completed"
+  },
+  {
+    "order_id": 3,
+    "customer": "Carol",
+    "amount": 450.0,
+    "status": "completed"
+  },
+  {
+    "order_id": 5,
+    "customer": "Eve",
+    "amount": 320.0,
+    "status": "completed"
+  },
+  {
+    "order_id": 7,
+    "customer": "Grace",
+    "amount": 180.0,
+    "status": "completed"
+  }
+]
