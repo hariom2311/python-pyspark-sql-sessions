@@ -27,7 +27,7 @@ spark = SparkSession.builder \
 
 spark.sparkContext.setLogLevel("ERROR")
 
-DATA = "pyspark-sessions/day5-column-filter-operations/data"
+DATA = "day5-column-filter-operations/data"
 
 print("=" * 60)
 print("Day 5 - Column Operations and Filtering")

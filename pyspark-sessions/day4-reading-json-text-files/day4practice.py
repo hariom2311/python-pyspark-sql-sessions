@@ -34,7 +34,7 @@ spark = SparkSession.builder \
 
 spark.sparkContext.setLogLevel("ERROR")
 
-DATA = "pyspark-sessions/day4-reading-json-text-files/data"
+DATA = "day4-reading-json-text-files/data"
 
 print("=" * 60)
 print("Day 4 - Reading JSON and Text Files in PySpark")

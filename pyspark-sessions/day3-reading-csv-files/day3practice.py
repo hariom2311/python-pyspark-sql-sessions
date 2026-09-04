@@ -34,7 +34,7 @@ spark = SparkSession.builder \
 
 spark.sparkContext.setLogLevel("ERROR")
 
-DATA = "pyspark-sessions/day3-reading-csv-files/data"
+DATA = "day3-reading-csv-files/data"
 
 print("=" * 60)
 print("Day 3 - Reading CSV Files in PySpark")
