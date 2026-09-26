@@ -207,7 +207,7 @@ values = ['Rahul', 8388833, 'rahul@gmail.com']
 
 # expected output 
 
-for index, value in enumerate(values):
+for index, value in enumerate(values): # enuerate will hold values like this [(0, 'rahul'), (1, 3434343)]
     print(index, value)
 
 # {

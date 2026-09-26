@@ -142,7 +142,6 @@ INSERT INTO store.employees (name, department, salary, manager_id) VALUES
 --   Silver → '10%'
 --   Bronze → '5%'
 -- Customers with no city should show 'Unknown' for city.
--- Order by tier (Gold first, then Silver, then Bronze).
 --
 -- Expected output (8 rows):
 -- name            | city      | tier   | tier_discount

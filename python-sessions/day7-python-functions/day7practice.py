@@ -52,18 +52,3 @@
 # square = lambda x: x*x
 # print(square(7))
 
-
-from copy import copy, deepcopy
-
-list1 = [1, 2, 3, 4, 5, [6, 7, 9]]
-list2 = list1
-list3 = copy(list1)
-list4 = deepcopy(list1)
-
-
-print(id(list1), id(list1[5]))
-print(id(list2), id(list2[5]))
-print(id(list3), id(list3[5]))
-print(id(list4), id(list4[5]))
-# list1[4][0]=60
-# print(list2, list3, list4)

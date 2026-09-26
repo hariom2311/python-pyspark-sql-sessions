@@ -80,3 +80,10 @@ print(string1)
 
 # pass, break and continue
 
+# Which library we will use in python to use api call?
+
+# How we can call the post API call in python requests library?
+
+# how we can implement paginated api calls in python?
+
+# how many many API methods we can call using python?

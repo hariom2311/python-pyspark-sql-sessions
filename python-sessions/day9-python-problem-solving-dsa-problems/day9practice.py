@@ -198,13 +198,13 @@
 #     {"id": 4, "name": "Raj", "salary": 70000}
 # ]
 
-# for employee in employees:
-#     if employee.get("salary"):
-#         employee["salary_status"] = "available"
-#     else:
-#         employee["salary"] = 0
-#         employee["salary_status"] = "missing"
-#     print(employee)
+for employee in employees:
+    if employee.get("salary"):
+        employee["salary_status"] = "available"
+    else:
+        employee["salary"] = 0
+        employee["salary_status"] = "missing"
+    print(employee)
 
 
 
@@ -225,6 +225,12 @@ transactions = [
     {"id": 5, "customer": "Amit", "amount": 500},
     {"id": 3, "customer": "Priya", "amount": 700}
 ]
+
+negative_transactions = []
+missing_transactions = []
+duplicate_transactions = []
+valid_transactions = []
+
 
 # Find:
 
