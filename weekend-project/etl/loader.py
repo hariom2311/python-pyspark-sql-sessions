@@ -1,4 +1,8 @@
+import json
 from datetime import datetime, timezone
+from config.logger import get_logger
+
+logger = get_logger("loader")
 
 
 # ── Schema + all tables setup ────────────────────────────────────────────────
@@ -159,8 +163,35 @@ def create_tables(connection):
         );
     """)
 
+    # dead letter table — stores records that failed to insert
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS bronze.failed_records (
+            id            SERIAL PRIMARY KEY,
+            pipeline_name TEXT,
+            raw_record    TEXT,
+            error_message TEXT,
+            failed_at     TIMESTAMPTZ DEFAULT NOW()
+        );
+    """)
+
+    # ── Indexes for query performance ────────────────────────────────────────
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_payments_updated_at  ON bronze.payments(updated_at);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_payments_status      ON bronze.payments(status);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_payments_customer_id ON bronze.payments(customer_id);")
+
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_sessions_customer_id ON bronze.sessions(customer_id);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_sessions_station_id  ON bronze.sessions(station_id);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_sessions_started_at  ON bronze.sessions(started_at);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_sessions_updated_at  ON bronze.sessions(updated_at);")
+
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_customers_updated_at ON bronze.customers(updated_at);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_stations_state_code  ON bronze.stations(state_code);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_stations_updated_at  ON bronze.stations(updated_at);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_vehicles_vehicle_id  ON bronze.vehicles(vehicle_id);")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_vehicles_is_current  ON bronze.vehicles(is_current);")
+
     connection.commit()
-    print("All bronze tables ready")
+    logger.info("All bronze tables and indexes created/verified")
 
 
 # ── Metadata helpers ─────────────────────────────────────────────────────────
@@ -194,13 +225,24 @@ def save_pipeline_metadata(connection, pipeline_name, load_type, records_inserte
         records_inserted
     ))
     connection.commit()
-    print(f"  Metadata saved for {pipeline_name}")
+    logger.info(f"Metadata saved for {pipeline_name} — {records_inserted} records")
 
 
-# ── Insert functions — one per table ────────────────────────────────────────
+# ── Dead letter helper ────────────────────────────────────────────────────────
+
+def save_failed_record(connection, pipeline_name, record, error_message):
+    cursor = connection.cursor()
+    cursor.execute("""
+        INSERT INTO bronze.failed_records (pipeline_name, raw_record, error_message)
+        VALUES (%s, %s, %s);
+    """, (pipeline_name, json.dumps(record, default=str), error_message))
+    connection.commit()
+    logger.warning(f"Failed record saved for pipeline '{pipeline_name}': {error_message}")
+
+
+# ── Insert functions — one per table ─────────────────────────────────────────
 
 def insert_payments(connection, records):
-    cursor = connection.cursor()
     query = """
         INSERT INTO bronze.payments (
             id, payment_id, session_id, customer_id, gateway,
@@ -217,13 +259,21 @@ def insert_payments(connection, records):
             updated_at   = EXCLUDED.updated_at,
             ingested_at  = EXCLUDED.ingested_at;
     """
-    cursor.executemany(query, records)
-    connection.commit()
-    print(f"  Inserted {len(records)} records into bronze.payments")
+    success, failed = 0, 0
+    for record in records:
+        try:
+            connection.cursor().execute(query, record)
+            connection.commit()
+            success += 1
+        except Exception as e:
+            connection.rollback()
+            failed += 1
+            logger.error(f"Insert failed for payment_id {record.get('payment_id')}: {e}")
+            save_failed_record(connection, "payments", record, str(e))
+    logger.info(f"bronze.payments — inserted: {success}, failed: {failed}")
 
 
 def insert_sessions(connection, records):
-    cursor = connection.cursor()
     query = """
         INSERT INTO bronze.sessions (
             id, session_id, vehicle_id, station_id, customer_id,
@@ -243,13 +293,21 @@ def insert_sessions(connection, records):
             updated_at     = EXCLUDED.updated_at,
             ingested_at    = EXCLUDED.ingested_at;
     """
-    cursor.executemany(query, records)
-    connection.commit()
-    print(f"  Inserted {len(records)} records into bronze.sessions")
+    success, failed = 0, 0
+    for record in records:
+        try:
+            connection.cursor().execute(query, record)
+            connection.commit()
+            success += 1
+        except Exception as e:
+            connection.rollback()
+            failed += 1
+            logger.error(f"Insert failed for session_id {record.get('session_id')}: {e}")
+            save_failed_record(connection, "sessions", record, str(e))
+    logger.info(f"bronze.sessions — inserted: {success}, failed: {failed}")
 
 
 def insert_customers(connection, records):
-    cursor = connection.cursor()
     query = """
         INSERT INTO bronze.customers (
             id, customer_id, full_name, email, phone,
@@ -264,13 +322,21 @@ def insert_customers(connection, records):
             updated_at   = EXCLUDED.updated_at,
             ingested_at  = EXCLUDED.ingested_at;
     """
-    cursor.executemany(query, records)
-    connection.commit()
-    print(f"  Inserted {len(records)} records into bronze.customers")
+    success, failed = 0, 0
+    for record in records:
+        try:
+            connection.cursor().execute(query, record)
+            connection.commit()
+            success += 1
+        except Exception as e:
+            connection.rollback()
+            failed += 1
+            logger.error(f"Insert failed for customer_id {record.get('customer_id')}: {e}")
+            save_failed_record(connection, "customers", record, str(e))
+    logger.info(f"bronze.customers — inserted: {success}, failed: {failed}")
 
 
 def insert_vehicles(connection, records):
-    cursor = connection.cursor()
     query = """
         INSERT INTO bronze.vehicles (
             id, vehicle_id, make, model, year, vehicle_type,
@@ -290,13 +356,21 @@ def insert_vehicles(connection, records):
             updated_at           = EXCLUDED.updated_at,
             ingested_at          = EXCLUDED.ingested_at;
     """
-    cursor.executemany(query, records)
-    connection.commit()
-    print(f"  Inserted {len(records)} records into bronze.vehicles")
+    success, failed = 0, 0
+    for record in records:
+        try:
+            connection.cursor().execute(query, record)
+            connection.commit()
+            success += 1
+        except Exception as e:
+            connection.rollback()
+            failed += 1
+            logger.error(f"Insert failed for vehicle_id {record.get('vehicle_id')}: {e}")
+            save_failed_record(connection, "vehicles", record, str(e))
+    logger.info(f"bronze.vehicles — inserted: {success}, failed: {failed}")
 
 
 def insert_stations(connection, records):
-    cursor = connection.cursor()
     query = """
         INSERT INTO bronze.stations (
             id, station_id, name, state_code, city,
@@ -315,13 +389,21 @@ def insert_stations(connection, records):
             updated_at  = EXCLUDED.updated_at,
             ingested_at = EXCLUDED.ingested_at;
     """
-    cursor.executemany(query, records)
-    connection.commit()
-    print(f"  Inserted {len(records)} records into bronze.stations")
+    success, failed = 0, 0
+    for record in records:
+        try:
+            connection.cursor().execute(query, record)
+            connection.commit()
+            success += 1
+        except Exception as e:
+            connection.rollback()
+            failed += 1
+            logger.error(f"Insert failed for station_id {record.get('station_id')}: {e}")
+            save_failed_record(connection, "stations", record, str(e))
+    logger.info(f"bronze.stations — inserted: {success}, failed: {failed}")
 
 
 def insert_partners(connection, records):
-    cursor = connection.cursor()
     query = """
         INSERT INTO bronze.partners (
             id, partner_id, partner_name, state, status,
@@ -338,13 +420,21 @@ def insert_partners(connection, records):
             updated_at        = EXCLUDED.updated_at,
             ingested_at       = EXCLUDED.ingested_at;
     """
-    cursor.executemany(query, records)
-    connection.commit()
-    print(f"  Inserted {len(records)} records into bronze.partners")
+    success, failed = 0, 0
+    for record in records:
+        try:
+            connection.cursor().execute(query, record)
+            connection.commit()
+            success += 1
+        except Exception as e:
+            connection.rollback()
+            failed += 1
+            logger.error(f"Insert failed for partner_id {record.get('partner_id')}: {e}")
+            save_failed_record(connection, "partners", record, str(e))
+    logger.info(f"bronze.partners — inserted: {success}, failed: {failed}")
 
 
 def insert_energy_prices(connection, records):
-    cursor = connection.cursor()
     query = """
         INSERT INTO bronze.energy_prices (
             id, price_id, station_id, state_code,
@@ -364,6 +454,15 @@ def insert_energy_prices(connection, records):
             updated_at     = EXCLUDED.updated_at,
             ingested_at    = EXCLUDED.ingested_at;
     """
-    cursor.executemany(query, records)
-    connection.commit()
-    print(f"  Inserted {len(records)} records into bronze.energy_prices")
+    success, failed = 0, 0
+    for record in records:
+        try:
+            connection.cursor().execute(query, record)
+            connection.commit()
+            success += 1
+        except Exception as e:
+            connection.rollback()
+            failed += 1
+            logger.error(f"Insert failed for price_id {record.get('price_id')}: {e}")
+            save_failed_record(connection, "energy_prices", record, str(e))
+    logger.info(f"bronze.energy_prices — inserted: {success}, failed: {failed}")

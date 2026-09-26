@@ -1,4 +1,7 @@
 from datetime import datetime, timezone
+from config.logger import get_logger
+
+logger = get_logger("transformer")
 
 
 def _now():
@@ -26,7 +29,7 @@ def transform_payments(records):
             "ingested_at" : _now(),
         }
         clean_records.append(clean)
-    print(f"  Transformed {len(clean_records)} payment records")
+    logger.info(f"Transformed {len(clean_records)} payment records")
     return clean_records
 
 
@@ -55,7 +58,7 @@ def transform_sessions(records):
             "ingested_at"   : _now(),
         }
         clean_records.append(clean)
-    print(f"  Transformed {len(clean_records)} session records")
+    logger.info(f"Transformed {len(clean_records)} session records")
     return clean_records
 
 
@@ -77,7 +80,7 @@ def transform_customers(records):
             "ingested_at"  : _now(),
         }
         clean_records.append(clean)
-    print(f"  Transformed {len(clean_records)} customer records")
+    logger.info(f"Transformed {len(clean_records)} customer records")
     return clean_records
 
 
@@ -105,7 +108,7 @@ def transform_vehicles(records):
             "ingested_at"         : _now(),
         }
         clean_records.append(clean)
-    print(f"  Transformed {len(clean_records)} vehicle records")
+    logger.info(f"Transformed {len(clean_records)} vehicle records")
     return clean_records
 
 
@@ -133,7 +136,7 @@ def transform_stations(records):
             "ingested_at"       : _now(),
         }
         clean_records.append(clean)
-    print(f"  Transformed {len(clean_records)} station records")
+    logger.info(f"Transformed {len(clean_records)} station records")
     return clean_records
 
 
@@ -156,7 +159,7 @@ def transform_partners(records):
             "ingested_at"        : _now(),
         }
         clean_records.append(clean)
-    print(f"  Transformed {len(clean_records)} partner records")
+    logger.info(f"Transformed {len(clean_records)} partner records")
     return clean_records
 
 
@@ -182,5 +185,5 @@ def transform_energy_prices(records):
             "ingested_at"     : _now(),
         }
         clean_records.append(clean)
-    print(f"  Transformed {len(clean_records)} energy price records")
+    logger.info(f"Transformed {len(clean_records)} energy price records")
     return clean_records

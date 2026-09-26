@@ -1,5 +1,8 @@
 import requests
 from config.settings import API_BASE_URL, API_USERNAME, API_PASSWORD
+from config.logger import get_logger
+
+logger = get_logger("auth")
 
 
 def get_token():
@@ -10,9 +13,9 @@ def get_token():
     }
 
     response = requests.post(url, json=payload)
-    print("Login status:", response.status_code)
+    logger.info(f"Login status: {response.status_code}")
 
     data = response.json()
     token = data["token"]
-    print("Token received:", token)
+    logger.info("Token received successfully")
     return token

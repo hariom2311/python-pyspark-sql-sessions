@@ -1,5 +1,6 @@
 from api.auth import get_token
 from database.connection import get_connection
+from config.logger import get_logger
 from etl.extractor import (
     fetch_payments,
     fetch_sessions,
@@ -31,6 +32,8 @@ from etl.loader import (
     save_pipeline_metadata,
 )
 
+logger = get_logger("main")
+
 # ── Config ────────────────────────────────────────────────────────────────────
 # set to "full" or "incremental"
 LOAD_TYPE = "incremental"
@@ -51,54 +54,45 @@ PIPELINES = [
 
 # ── Setup ─────────────────────────────────────────────────────────────────────
 
-# Step 1: connect to DB
 connection = get_connection()
-
-# Step 2: create all bronze tables if not exist
 create_tables(connection)
-
-# Step 3: get auth token
 token = get_token()
 
 # ── Run each pipeline ─────────────────────────────────────────────────────────
 
 for pipeline_name, fetch_fn, transform_fn, insert_fn in PIPELINES:
-    print(f"\n{'='*50}")
-    print(f"Pipeline: {pipeline_name.upper()}")
-    print(f"{'='*50}")
+    logger.info(f"--- Pipeline: {pipeline_name.upper()} ---")
+    try:
+        load_type       = LOAD_TYPE
+        last_updated_at = None
 
-    # Step 4: decide load type
-    load_type = LOAD_TYPE
-    last_updated_at = None
+        if load_type == "incremental":
+            last_updated_at = get_last_updated_at(connection, pipeline_name)
+            logger.info(f"Last updated at: {last_updated_at}")
 
-    if load_type == "incremental":
-        last_updated_at = get_last_updated_at(connection, pipeline_name)
-        print(f"Last updated at: {last_updated_at}")
+            if last_updated_at is None:
+                logger.info("No previous run found — switching to full load")
+                load_type = "full"
 
-        if last_updated_at is None:
-            print("No previous run found, switching to full load")
-            load_type = "full"
+        raw_records   = fetch_fn(token, load_type=load_type,
+                                 last_updated_at=last_updated_at, max_pages=MAX_PAGES)
+        clean_records = transform_fn(raw_records)
+        insert_fn(connection, clean_records)
 
-    # Step 5: fetch
-    raw_records = fetch_fn(token, load_type=load_type, last_updated_at=last_updated_at, max_pages=MAX_PAGES)
+        if clean_records:
+            max_updated_at = max(r["updated_at"] for r in clean_records if r.get("updated_at"))
+        else:
+            max_updated_at = last_updated_at
 
-    # Step 6: transform
-    clean_records = transform_fn(raw_records)
+        save_pipeline_metadata(connection, pipeline_name, load_type,
+                               len(clean_records), max_updated_at)
 
-    # Step 7: insert
-    insert_fn(connection, clean_records)
-
-    # Step 8: save metadata
-    if clean_records:
-        max_updated_at = max(r["updated_at"] for r in clean_records if r.get("updated_at"))
-    else:
-        max_updated_at = last_updated_at
-
-    save_pipeline_metadata(connection, pipeline_name, load_type, len(clean_records), max_updated_at)
+    except Exception as e:
+        logger.error(f"Pipeline '{pipeline_name}' failed: {e}")
+        logger.info(f"Skipping '{pipeline_name}' — continuing with next pipeline")
+        continue
 
 # ── Done ──────────────────────────────────────────────────────────────────────
 
 connection.close()
-print(f"\n{'='*50}")
-print("All pipelines complete")
-print(f"{'='*50}")
+logger.info("All pipelines complete")

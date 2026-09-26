@@ -1,6 +1,9 @@
 import time
 import requests
 from config.settings import API_BASE_URL
+from config.logger import get_logger
+
+logger = get_logger("extractor")
 
 
 def _fetch(token, endpoint, load_type="full", last_updated_at=None, max_pages=None):
@@ -23,59 +26,59 @@ def _fetch(token, endpoint, load_type="full", last_updated_at=None, max_pages=No
 
         # rate limit hit — wait and retry
         if response.status_code == 429:
-            print(f"Rate limit hit on {endpoint}, waiting 10 seconds...")
+            logger.warning(f"Rate limit hit on {endpoint}, waiting 10 seconds...")
             time.sleep(10)
             continue
 
-        print(f"  Page {page} status: {response.status_code}")
+        logger.info(f"Page {page} — status {response.status_code}")
         data = response.json()
 
         records     = data["data"]
         total_pages = data["pagination"]["total_pages"]
 
         all_records.extend(records)
-        print(f"  Page {page}/{total_pages} — {len(records)} records")
+        logger.info(f"Page {page}/{total_pages} — {len(records)} records fetched")
 
         if page >= total_pages:
             break
 
         if max_pages and page >= max_pages:
-            print(f"  Reached max_pages limit ({max_pages}), stopping early")
+            logger.warning(f"Reached max_pages limit ({max_pages}), stopping early")
             break
 
         page += 1
         time.sleep(0.3)   # small pause between pages to avoid rate limit
 
-    print(f"  Total fetched: {len(all_records)}")
+    logger.info(f"Total fetched from {endpoint}: {len(all_records)}")
     return all_records
 
 
 # ── Public fetch functions — one per API ────────────────────────────────────
 
 def fetch_payments(token, load_type="full", last_updated_at=None, max_pages=None):
-    print("Fetching: payments")
+    logger.info("Fetching: payments")
     return _fetch(token, "/api/db/payments/", load_type, last_updated_at, max_pages)
 
 def fetch_sessions(token, load_type="full", last_updated_at=None, max_pages=None):
-    print("Fetching: charging sessions")
+    logger.info("Fetching: charging sessions")
     return _fetch(token, "/api/db/sessions/", load_type, last_updated_at, max_pages)
 
 def fetch_customers(token, load_type="full", last_updated_at=None, max_pages=None):
-    print("Fetching: customers")
+    logger.info("Fetching: customers")
     return _fetch(token, "/api/db/customers/", load_type, last_updated_at, max_pages)
 
 def fetch_vehicles(token, load_type="full", last_updated_at=None, max_pages=None):
-    print("Fetching: vehicles")
+    logger.info("Fetching: vehicles")
     return _fetch(token, "/api/db/vehicles/", load_type, last_updated_at, max_pages)
 
 def fetch_stations(token, load_type="full", last_updated_at=None, max_pages=None):
-    print("Fetching: charging stations")
+    logger.info("Fetching: charging stations")
     return _fetch(token, "/api/db/stations/", load_type, last_updated_at, max_pages)
 
 def fetch_partners(token, load_type="full", last_updated_at=None, max_pages=None):
-    print("Fetching: partners")
+    logger.info("Fetching: partners")
     return _fetch(token, "/api/db/partners/", load_type, last_updated_at, max_pages)
 
 def fetch_energy_prices(token, load_type="full", last_updated_at=None, max_pages=None):
-    print("Fetching: energy prices")
+    logger.info("Fetching: energy prices")
     return _fetch(token, "/api/db/energy-prices/", load_type, last_updated_at, max_pages)

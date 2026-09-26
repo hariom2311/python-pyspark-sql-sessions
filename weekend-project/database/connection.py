@@ -1,5 +1,8 @@
 import psycopg2
 from config.settings import DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD
+from config.logger import get_logger
+
+logger = get_logger("database")
 
 
 def get_connection():
@@ -10,5 +13,5 @@ def get_connection():
         user=DB_USER,
         password=DB_PASSWORD
     )
-    print("DB connection successful")
+    logger.info(f"DB connection successful — {DB_NAME}@{DB_HOST}:{DB_PORT}")
     return connection
